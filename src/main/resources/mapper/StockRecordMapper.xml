@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.citi.stock.mapper.StockRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.citi.stock.entity.StockRecord">
+            <id property="stockrecordId" column="stockrecord_id" jdbcType="INTEGER"/>
+            <result property="stockrecordDatetime" column="stockrecord_datetime" jdbcType="TIMESTAMP"/>
+            <result property="stockrecordLow" column="stockrecord_low" jdbcType="DECIMAL"/>
+            <result property="stockrecordHigh" column="stockrecord_high" jdbcType="DECIMAL"/>
+            <result property="stockrecordPercent" column="stockrecord_percent" jdbcType="DECIMAL"/>
+            <result property="stockrecordValue" column="stockrecord_value" jdbcType="DECIMAL"/>
+            <result property="stockrecordVolume" column="stockrecord_volume" jdbcType="DOUBLE"/>
+            <result property="stockrecordTurnover" column="stockrecord_turnover" jdbcType="DOUBLE"/>
+            <result property="stockId" column="stock_id" jdbcType="INTEGER"/>
+            <result property="stockrecordOpenPrice" column="stockrecord_open_price" jdbcType="DECIMAL"/>
+            <result property="stockrecordEndPrice" column="stockrecord_end_price" jdbcType="DECIMAL"/>
+            <result property="stockrecordLastEndPrice" column="stockrecord_last_end_price" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        stockrecord_id,stockrecord_datetime,stockrecord_low,
+        stockrecord_high,stockrecord_percent,stockrecord_value,
+        stockrecord_volume,stockrecord_turnover,stock_id,
+        stockrecord_open_price,stockrecord_end_price,stockrecord_last_end_price
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from stock_record
+        where  stockrecord_id = #{stockrecordId,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from stock_record
+        where  stockrecord_id = #{stockrecordId,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="stockrecord_id" keyProperty="stockrecordId" parameterType="com.citi.stock.entity.StockRecord" useGeneratedKeys="true">
+        insert into stock_record
+        ( stockrecord_id,stockrecord_datetime,stockrecord_low
+        ,stockrecord_high,stockrecord_percent,stockrecord_value
+        ,stockrecord_volume,stockrecord_turnover,stock_id
+        ,stockrecord_open_price,stockrecord_end_price,stockrecord_last_end_price
+        )
+        values (#{stockrecordId,jdbcType=INTEGER},#{stockrecordDatetime,jdbcType=TIMESTAMP},#{stockrecordLow,jdbcType=DECIMAL}
+        ,#{stockrecordHigh,jdbcType=DECIMAL},#{stockrecordPercent,jdbcType=DECIMAL},#{stockrecordValue,jdbcType=DECIMAL}
+        ,#{stockrecordVolume,jdbcType=DOUBLE},#{stockrecordTurnover,jdbcType=DOUBLE},#{stockId,jdbcType=INTEGER}
+        ,#{stockrecordOpenPrice,jdbcType=DECIMAL},#{stockrecordEndPrice,jdbcType=DECIMAL},#{stockrecordLastEndPrice,jdbcType=DECIMAL}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="stockrecord_id" keyProperty="stockrecordId" parameterType="com.citi.stock.entity.StockRecord" useGeneratedKeys="true">
+        insert into stock_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="stockrecordId != null">stockrecord_id,</if>
+                <if test="stockrecordDatetime != null">stockrecord_datetime,</if>
+                <if test="stockrecordLow != null">stockrecord_low,</if>
+                <if test="stockrecordHigh != null">stockrecord_high,</if>
+                <if test="stockrecordPercent != null">stockrecord_percent,</if>
+                <if test="stockrecordValue != null">stockrecord_value,</if>
+                <if test="stockrecordVolume != null">stockrecord_volume,</if>
+                <if test="stockrecordTurnover != null">stockrecord_turnover,</if>
+                <if test="stockId != null">stock_id,</if>
+                <if test="stockrecordOpenPrice != null">stockrecord_open_price,</if>
+                <if test="stockrecordEndPrice != null">stockrecord_end_price,</if>
+                <if test="stockrecordLastEndPrice != null">stockrecord_last_end_price,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="stockrecordId != null">#{stockrecordId,jdbcType=INTEGER},</if>
+                <if test="stockrecordDatetime != null">#{stockrecordDatetime,jdbcType=TIMESTAMP},</if>
+                <if test="stockrecordLow != null">#{stockrecordLow,jdbcType=DECIMAL},</if>
+                <if test="stockrecordHigh != null">#{stockrecordHigh,jdbcType=DECIMAL},</if>
+                <if test="stockrecordPercent != null">#{stockrecordPercent,jdbcType=DECIMAL},</if>
+                <if test="stockrecordValue != null">#{stockrecordValue,jdbcType=DECIMAL},</if>
+                <if test="stockrecordVolume != null">#{stockrecordVolume,jdbcType=DOUBLE},</if>
+                <if test="stockrecordTurnover != null">#{stockrecordTurnover,jdbcType=DOUBLE},</if>
+                <if test="stockId != null">#{stockId,jdbcType=INTEGER},</if>
+                <if test="stockrecordOpenPrice != null">#{stockrecordOpenPrice,jdbcType=DECIMAL},</if>
+                <if test="stockrecordEndPrice != null">#{stockrecordEndPrice,jdbcType=DECIMAL},</if>
+                <if test="stockrecordLastEndPrice != null">#{stockrecordLastEndPrice,jdbcType=DECIMAL},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.citi.stock.entity.StockRecord">
+        update stock_record
+        <set>
+                <if test="stockrecordDatetime != null">
+                    stockrecord_datetime = #{stockrecordDatetime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="stockrecordLow != null">
+                    stockrecord_low = #{stockrecordLow,jdbcType=DECIMAL},
+                </if>
+                <if test="stockrecordHigh != null">
+                    stockrecord_high = #{stockrecordHigh,jdbcType=DECIMAL},
+                </if>
+                <if test="stockrecordPercent != null">
+                    stockrecord_percent = #{stockrecordPercent,jdbcType=DECIMAL},
+                </if>
+                <if test="stockrecordValue != null">
+                    stockrecord_value = #{stockrecordValue,jdbcType=DECIMAL},
+                </if>
+                <if test="stockrecordVolume != null">
+                    stockrecord_volume = #{stockrecordVolume,jdbcType=DOUBLE},
+                </if>
+                <if test="stockrecordTurnover != null">
+                    stockrecord_turnover = #{stockrecordTurnover,jdbcType=DOUBLE},
+                </if>
+                <if test="stockId != null">
+                    stock_id = #{stockId,jdbcType=INTEGER},
+                </if>
+                <if test="stockrecordOpenPrice != null">
+                    stockrecord_open_price = #{stockrecordOpenPrice,jdbcType=DECIMAL},
+                </if>
+                <if test="stockrecordEndPrice != null">
+                    stockrecord_end_price = #{stockrecordEndPrice,jdbcType=DECIMAL},
+                </if>
+                <if test="stockrecordLastEndPrice != null">
+                    stockrecord_last_end_price = #{stockrecordLastEndPrice,jdbcType=DECIMAL},
+                </if>
+        </set>
+        where   stockrecord_id = #{stockrecordId,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.citi.stock.entity.StockRecord">
+        update stock_record
+        set 
+            stockrecord_datetime =  #{stockrecordDatetime,jdbcType=TIMESTAMP},
+            stockrecord_low =  #{stockrecordLow,jdbcType=DECIMAL},
+            stockrecord_high =  #{stockrecordHigh,jdbcType=DECIMAL},
+            stockrecord_percent =  #{stockrecordPercent,jdbcType=DECIMAL},
+            stockrecord_value =  #{stockrecordValue,jdbcType=DECIMAL},
+            stockrecord_volume =  #{stockrecordVolume,jdbcType=DOUBLE},
+            stockrecord_turnover =  #{stockrecordTurnover,jdbcType=DOUBLE},
+            stock_id =  #{stockId,jdbcType=INTEGER},
+            stockrecord_open_price =  #{stockrecordOpenPrice,jdbcType=DECIMAL},
+            stockrecord_end_price =  #{stockrecordEndPrice,jdbcType=DECIMAL},
+            stockrecord_last_end_price =  #{stockrecordLastEndPrice,jdbcType=DECIMAL}
+        where   stockrecord_id = #{stockrecordId,jdbcType=INTEGER} 
+    </update>
+</mapper>

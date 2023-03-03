@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.citi.stock.mapper.StockMapper">
+
+    <resultMap id="BaseResultMap" type="com.citi.stock.entity.Stock">
+            <id property="stockId" column="stock_id" jdbcType="INTEGER"/>
+            <result property="stockName" column="stock_name" jdbcType="VARCHAR"/>
+            <result property="stockUpdateDate" column="stock_update_date" jdbcType="DATE"/>
+            <result property="stockCode" column="stock_code" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        stock_id,stock_name,stock_update_date,
+        stock_code
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from stock
+        where  stock_id = #{stockId,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from stock
+        where  stock_id = #{stockId,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="stock_id" keyProperty="stockId" parameterType="com.citi.stock.entity.Stock" useGeneratedKeys="true">
+        insert into stock
+        ( stock_id,stock_name,stock_update_date
+        ,stock_code)
+        values (#{stockId,jdbcType=INTEGER},#{stockName,jdbcType=VARCHAR},#{stockUpdateDate,jdbcType=DATE}
+        ,#{stockCode,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="stock_id" keyProperty="stockId" parameterType="com.citi.stock.entity.Stock" useGeneratedKeys="true">
+        insert into stock
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="stockId != null">stock_id,</if>
+                <if test="stockName != null">stock_name,</if>
+                <if test="stockUpdateDate != null">stock_update_date,</if>
+                <if test="stockCode != null">stock_code,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="stockId != null">#{stockId,jdbcType=INTEGER},</if>
+                <if test="stockName != null">#{stockName,jdbcType=VARCHAR},</if>
+                <if test="stockUpdateDate != null">#{stockUpdateDate,jdbcType=DATE},</if>
+                <if test="stockCode != null">#{stockCode,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.citi.stock.entity.Stock">
+        update stock
+        <set>
+                <if test="stockName != null">
+                    stock_name = #{stockName,jdbcType=VARCHAR},
+                </if>
+                <if test="stockUpdateDate != null">
+                    stock_update_date = #{stockUpdateDate,jdbcType=DATE},
+                </if>
+                <if test="stockCode != null">
+                    stock_code = #{stockCode,jdbcType=VARCHAR},
+                </if>
+        </set>
+        where   stock_id = #{stockId,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.citi.stock.entity.Stock">
+        update stock
+        set 
+            stock_name =  #{stockName,jdbcType=VARCHAR},
+            stock_update_date =  #{stockUpdateDate,jdbcType=DATE},
+            stock_code =  #{stockCode,jdbcType=VARCHAR}
+        where   stock_id = #{stockId,jdbcType=INTEGER} 
+    </update>
+</mapper>
