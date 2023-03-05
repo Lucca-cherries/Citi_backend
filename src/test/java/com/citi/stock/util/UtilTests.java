@@ -13,7 +13,7 @@ public class UtilTests {
         Process process;
         try {
             process = Runtime.getRuntime().exec(
-                    "python D:\\Javaaa\\stock\\src\\main\\java\\com\\citi\\stock\\util\\Runtime.py");
+                    "python D:\\Javaaa\\stock\\src\\main\\java\\com\\citi\\stock\\util\\Runtime.py hello");
             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
             while ((line = in.readLine()) != null) {
