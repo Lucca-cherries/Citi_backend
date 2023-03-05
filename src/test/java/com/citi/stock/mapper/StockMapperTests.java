@@ -12,7 +12,6 @@ public class StockMapperTests {
     @Autowired
     private StockMapper stockMapper;
 
-
     public void deleteByPrimaryKey(){
 
     }
