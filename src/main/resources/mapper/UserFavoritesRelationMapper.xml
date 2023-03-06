@@ -3,21 +3,26 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.citi.stock.mapper.UserFavoritesRelationMapper">
-
     <resultMap id="BaseResultMap" type="com.citi.stock.entity.UserFavoritesRelation">
             <result property="userfavoritesUserId" column="userfavorites_user_id" jdbcType="INTEGER"/>
-            <result property="userfavoritesStockId" column="userfavorites_stock_id" jdbcType="INTEGER"/>
+            <result property="userfavoritesStockCode" column="userfavorites_stock_code" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        userfavorites_user_id,userfavorites_stock_id
+        userfavorites_user_id,userfavorites_stock_code
     </sql>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+<!--    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">-->
+<!--        select-->
+<!--        <include refid="Base_Column_List" />-->
+<!--        from user_favorites_relation-->
+<!--        where userfavorites_user_id = #{userfavoritesUserId,jdbcType=INTEGER}-->
+<!--    </select>-->
+    <select id="selectByUid" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from user_favorites_relation
-        where 
+        where userfavorites_user_id = #{userfavoritesUserId,jdbcType=INTEGER}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -26,18 +31,18 @@
     </delete>
     <insert id="insert">
         insert into user_favorites_relation
-        ( userfavorites_user_id,userfavorites_stock_id)
-        values (#{userfavoritesUserId,jdbcType=INTEGER},#{userfavoritesStockId,jdbcType=INTEGER})
+        ( userfavorites_user_id,userfavorites_stock_code)
+        values (#{userfavoritesUserId,jdbcType=INTEGER},#{userfavoritesStockCode,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective">
         insert into user_favorites_relation
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="userfavoritesUserId != null">userfavorites_user_id,</if>
-                <if test="userfavoritesStockId != null">userfavorites_stock_id,</if>
+                <if test="userfavoritesStockCode != null">userfavorites_stock_code,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="userfavoritesUserId != null">#{userfavoritesUserId,jdbcType=INTEGER},</if>
-                <if test="userfavoritesStockId != null">#{userfavoritesStockId,jdbcType=INTEGER},</if>
+                <if test="userfavoritesStockCode != null">#{userfavoritesStockCode,jdbcType=VARCHAR},</if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.citi.stock.entity.UserFavoritesRelation">
@@ -46,8 +51,8 @@
                 <if test="userfavoritesUserId != null">
                     userfavorites_user_id = #{userfavoritesUserId,jdbcType=INTEGER},
                 </if>
-                <if test="userfavoritesStockId != null">
-                    userfavorites_stock_id = #{userfavoritesStockId,jdbcType=INTEGER},
+                <if test="userfavoritesStockCode != null">
+                    userfavorites_stock_code = #{userfavoritesStockCode,jdbcType=VARCHAR},
                 </if>
         </set>
         where  
@@ -56,7 +61,7 @@
         update user_favorites_relation
         set 
             userfavorites_user_id =  #{userfavoritesUserId,jdbcType=INTEGER},
-            userfavorites_stock_id =  #{userfavoritesStockId,jdbcType=INTEGER}
+            userfavorites_stock_code =  #{userfavoritesStockCode,jdbcType=VARCHAR}
         where  
     </update>
 </mapper>

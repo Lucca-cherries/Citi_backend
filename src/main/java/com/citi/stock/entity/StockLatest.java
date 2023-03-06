@@ -1,26 +1,23 @@
 package com.citi.stock.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.Date;
+
 /**
- * @TableName stock
+ * 用于封装第三方api实时数据到对象中
  */
 @Data
 @Builder
-public class Stock implements Serializable {
+public class StockLatest {
     private Integer stockId;
-
-    private String stockCode;
 
     private String stockName;
 
     private Date stockUpdateDate;
 
-    private String stockSvg;
+    private String stockCode;
 
     private static final long serialVersionUID = 1L;
 }

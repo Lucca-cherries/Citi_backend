@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @author bananaa
 * @description 针对表【stock】的数据库操作Mapper
-* @createDate 2023-03-01 22:26:11
+* @createDate 2023-03-06 09:50:22
 * @Entity com.citi.stock.entity.Stock
 */
 @Repository

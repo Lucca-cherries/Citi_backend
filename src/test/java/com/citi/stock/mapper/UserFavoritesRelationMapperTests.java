@@ -8,9 +8,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Date;
 
 @SpringBootTest
-public class StockMapperTests {
+public class UserFavoritesRelationMapperTests {
     @Autowired
-    private StockMapper stockMapper;
+    private UserFavoritesRelationMapper userFavoritesRelationMapper;
 
-
+    @Test
+    public void selectByUid(){
+        System.err.println(userFavoritesRelationMapper.selectByUid(1L));
+    }
 }
