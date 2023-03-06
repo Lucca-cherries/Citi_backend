@@ -3,6 +3,8 @@ package com.citi.stock.mapper;
 import com.citi.stock.entity.Stock;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
 * @author bananaa
 * @description 针对表【stock】的数据库操作Mapper
@@ -12,16 +14,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StockMapper {
 
-    int deleteByPrimaryKey(Long id);
-
     int insert(Stock record);
-
-    int insertSelective(Stock record);
 
     Stock selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(Stock record);
+    Integer getTotalNum();
 
-    int updateByPrimaryKey(Stock record);
+    List<Stock> selectByPage(Integer start, Integer offset);
+
 
 }

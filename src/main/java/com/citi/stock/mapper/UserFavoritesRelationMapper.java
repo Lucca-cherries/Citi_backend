@@ -14,18 +14,25 @@ import java.util.List;
 @Repository
 public interface UserFavoritesRelationMapper {
 
-    int deleteByPrimaryKey(Long id);
+    /**
+     * 插入收藏数据
+     * @param record 收藏数据，包含用户id和股票code两个属性
+     * @return 影响的行数
+     */
+    int insertOne(UserFavoritesRelation record);
 
-    int insert(UserFavoritesRelation record);
+    /**
+     * 按照用户id查找收藏列表
+     * @param uid 用户id
+     * @return 收藏列表
+     */
+    List<UserFavoritesRelation> selectByUid(Long uid);
 
-    int insertSelective(UserFavoritesRelation record);
-
-//    UserFavoritesRelation selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(UserFavoritesRelation record);
-
-    int updateByPrimaryKey(UserFavoritesRelation record);
-
-    List<UserFavoritesRelation> selectByUid(Long id);
+    /**
+     * 删除一条收藏记录，要求uid和code同时匹配上
+     * @param record 待删除的记录
+     * @return 受影响的行数
+     */
+    int deleteByUidAndCode(UserFavoritesRelation record);
 
 }

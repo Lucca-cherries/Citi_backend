@@ -27,11 +27,13 @@
         from stock_record_history
         where  stockrecord_id = #{stockrecordId,jdbcType=INTEGER} 
     </select>
+    <select id="selectByStockCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from stock_record_history
+        where stock_code = #{stockCode}
+    </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from stock_record_history
-        where  stockrecord_id = #{stockrecordId,jdbcType=INTEGER} 
-    </delete>
     <insert id="insert" keyColumn="stockrecord_id" keyProperty="stockrecordId" parameterType="com.citi.stock.entity.StockRecordHistory" useGeneratedKeys="true">
         insert into stock_record_history
         ( stockrecord_id,stock_code,stockrecord_date
@@ -41,66 +43,7 @@
         ,#{stockrecordOpenPrice,jdbcType=DECIMAL},#{stockrecordEndPrice,jdbcType=DECIMAL},#{stockrecordLow,jdbcType=DECIMAL}
         ,#{stockrecordHigh,jdbcType=DECIMAL},#{stockrecordVolume,jdbcType=DOUBLE})
     </insert>
-    <insert id="insertSelective" keyColumn="stockrecord_id" keyProperty="stockrecordId" parameterType="com.citi.stock.entity.StockRecordHistory" useGeneratedKeys="true">
-        insert into stock_record_history
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="stockrecordId != null">stockrecord_id,</if>
-                <if test="stockCode != null">stock_code,</if>
-                <if test="stockrecordDate != null">stockrecord_date,</if>
-                <if test="stockrecordOpenPrice != null">stockrecord_open_price,</if>
-                <if test="stockrecordEndPrice != null">stockrecord_end_price,</if>
-                <if test="stockrecordLow != null">stockrecord_low,</if>
-                <if test="stockrecordHigh != null">stockrecord_high,</if>
-                <if test="stockrecordVolume != null">stockrecord_volume,</if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="stockrecordId != null">#{stockrecordId,jdbcType=INTEGER},</if>
-                <if test="stockCode != null">#{stockCode,jdbcType=VARCHAR},</if>
-                <if test="stockrecordDate != null">#{stockrecordDate,jdbcType=DATE},</if>
-                <if test="stockrecordOpenPrice != null">#{stockrecordOpenPrice,jdbcType=DECIMAL},</if>
-                <if test="stockrecordEndPrice != null">#{stockrecordEndPrice,jdbcType=DECIMAL},</if>
-                <if test="stockrecordLow != null">#{stockrecordLow,jdbcType=DECIMAL},</if>
-                <if test="stockrecordHigh != null">#{stockrecordHigh,jdbcType=DECIMAL},</if>
-                <if test="stockrecordVolume != null">#{stockrecordVolume,jdbcType=DOUBLE},</if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.citi.stock.entity.StockRecordHistory">
-        update stock_record_history
-        <set>
-                <if test="stockCode != null">
-                    stock_code = #{stockCode,jdbcType=VARCHAR},
-                </if>
-                <if test="stockrecordDate != null">
-                    stockrecord_date = #{stockrecordDate,jdbcType=DATE},
-                </if>
-                <if test="stockrecordOpenPrice != null">
-                    stockrecord_open_price = #{stockrecordOpenPrice,jdbcType=DECIMAL},
-                </if>
-                <if test="stockrecordEndPrice != null">
-                    stockrecord_end_price = #{stockrecordEndPrice,jdbcType=DECIMAL},
-                </if>
-                <if test="stockrecordLow != null">
-                    stockrecord_low = #{stockrecordLow,jdbcType=DECIMAL},
-                </if>
-                <if test="stockrecordHigh != null">
-                    stockrecord_high = #{stockrecordHigh,jdbcType=DECIMAL},
-                </if>
-                <if test="stockrecordVolume != null">
-                    stockrecord_volume = #{stockrecordVolume,jdbcType=DOUBLE},
-                </if>
-        </set>
-        where   stockrecord_id = #{stockrecordId,jdbcType=INTEGER} 
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.citi.stock.entity.StockRecordHistory">
-        update stock_record_history
-        set 
-            stock_code =  #{stockCode,jdbcType=VARCHAR},
-            stockrecord_date =  #{stockrecordDate,jdbcType=DATE},
-            stockrecord_open_price =  #{stockrecordOpenPrice,jdbcType=DECIMAL},
-            stockrecord_end_price =  #{stockrecordEndPrice,jdbcType=DECIMAL},
-            stockrecord_low =  #{stockrecordLow,jdbcType=DECIMAL},
-            stockrecord_high =  #{stockrecordHigh,jdbcType=DECIMAL},
-            stockrecord_volume =  #{stockrecordVolume,jdbcType=DOUBLE}
-        where   stockrecord_id = #{stockrecordId,jdbcType=INTEGER} 
-    </update>
+
+
+
 </mapper>

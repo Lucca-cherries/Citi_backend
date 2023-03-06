@@ -12,5 +12,13 @@ public class StockMapperTests {
     @Autowired
     private StockMapper stockMapper;
 
+    @Test
+    public void getTotalNum(){
+        System.err.println(stockMapper.getTotalNum());
+    }
 
+    @Test
+    public void selectByPage(){
+        System.err.println(stockMapper.selectByPage(10, 10));
+    }
 }

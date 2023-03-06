@@ -23,11 +23,17 @@
         from stock
         where  stock_id = #{stockId,jdbcType=INTEGER} 
     </select>
+    <select id="selectByPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from stock
+        limit #{start} offset #{offset}
+    </select>
+    <select id="getTotalNum" resultType="java.lang.Integer">
+        select count(*)
+        from stock
+    </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from stock
-        where  stock_id = #{stockId,jdbcType=INTEGER} 
-    </delete>
     <insert id="insert" keyColumn="stock_id" keyProperty="stockId" parameterType="com.citi.stock.entity.Stock" useGeneratedKeys="true">
         insert into stock
         ( stock_id,stock_code,stock_name
@@ -35,48 +41,6 @@
         values (#{stockId,jdbcType=INTEGER},#{stockCode,jdbcType=VARCHAR},#{stockName,jdbcType=VARCHAR}
         ,#{stockUpdateDate,jdbcType=DATE},#{stockSvg,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" keyColumn="stock_id" keyProperty="stockId" parameterType="com.citi.stock.entity.Stock" useGeneratedKeys="true">
-        insert into stock
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="stockId != null">stock_id,</if>
-                <if test="stockCode != null">stock_code,</if>
-                <if test="stockName != null">stock_name,</if>
-                <if test="stockUpdateDate != null">stock_update_date,</if>
-                <if test="stockSvg != null">stock_svg,</if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="stockId != null">#{stockId,jdbcType=INTEGER},</if>
-                <if test="stockCode != null">#{stockCode,jdbcType=VARCHAR},</if>
-                <if test="stockName != null">#{stockName,jdbcType=VARCHAR},</if>
-                <if test="stockUpdateDate != null">#{stockUpdateDate,jdbcType=DATE},</if>
-                <if test="stockSvg != null">#{stockSvg,jdbcType=VARCHAR},</if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.citi.stock.entity.Stock">
-        update stock
-        <set>
-                <if test="stockCode != null">
-                    stock_code = #{stockCode,jdbcType=VARCHAR},
-                </if>
-                <if test="stockName != null">
-                    stock_name = #{stockName,jdbcType=VARCHAR},
-                </if>
-                <if test="stockUpdateDate != null">
-                    stock_update_date = #{stockUpdateDate,jdbcType=DATE},
-                </if>
-                <if test="stockSvg != null">
-                    stock_svg = #{stockSvg,jdbcType=VARCHAR},
-                </if>
-        </set>
-        where   stock_id = #{stockId,jdbcType=INTEGER} 
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.citi.stock.entity.Stock">
-        update stock
-        set 
-            stock_code =  #{stockCode,jdbcType=VARCHAR},
-            stock_name =  #{stockName,jdbcType=VARCHAR},
-            stock_update_date =  #{stockUpdateDate,jdbcType=DATE},
-            stock_svg =  #{stockSvg,jdbcType=VARCHAR}
-        where   stock_id = #{stockId,jdbcType=INTEGER} 
-    </update>
+
+
 </mapper>
