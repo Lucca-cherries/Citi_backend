@@ -34,6 +34,13 @@
         from stock
     </select>
 
+    <select id="selectStockVOByPage" resultType="com.citi.stock.vo.StockVO">
+        select stock_code, stock_name, stock_svg, IFNULL(userfavorites_user_id=1,0)
+        from stock left join user_favorites_relation
+        on stock_code = userfavorites_stock_code
+        limit #{size} offset #{start}
+    </select>
+
     <insert id="insert" keyColumn="stock_id" keyProperty="stockId" parameterType="com.citi.stock.entity.Stock" useGeneratedKeys="true">
         insert into stock
         ( stock_id,stock_code,stock_name

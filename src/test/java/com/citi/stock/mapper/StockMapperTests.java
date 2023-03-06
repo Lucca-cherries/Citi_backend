@@ -21,4 +21,9 @@ public class StockMapperTests {
     public void selectByPage(){
         System.err.println(stockMapper.selectByPage(10, 10));
     }
+
+    @Test
+    public void selectStockVOByPage(){
+        System.err.println(stockMapper.selectStockVOByPage(1, 2, 2));
+    }
 }
