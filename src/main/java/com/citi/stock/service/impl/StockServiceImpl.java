@@ -23,4 +23,9 @@ public class StockServiceImpl implements IStockService {
     public List<StockVO> selectStockVOByPage(Integer uid, Integer page, Integer size) {
         return stockMapper.selectStockVOByPage(1, (page-1)*size, size);
     }
+
+    @Override
+    public Integer getTotalNumOfStocks() {
+        return stockMapper.getTotalNum();
+    }
 }

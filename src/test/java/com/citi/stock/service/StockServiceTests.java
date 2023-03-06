@@ -27,4 +27,9 @@ public class StockServiceTests {
     public void selectStockVOByPage() {
         System.err.println(iStockService.selectStockVOByPage(1, 1*2, 2));
     }
+
+    @Test
+    public void getTotalNumOfStocks(){
+        System.err.println(iStockService.getTotalNumOfStocks());
+    }
 }

@@ -10,4 +10,6 @@ public interface IStockService {
 
     List<StockVO> selectStockVOByPage(Integer uid, Integer start, Integer offset);
 
+    Integer getTotalNumOfStocks();
+
 }
