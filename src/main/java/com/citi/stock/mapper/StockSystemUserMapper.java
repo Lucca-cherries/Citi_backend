@@ -1,6 +1,7 @@
 package com.citi.stock.mapper;
 
 import com.citi.stock.entity.StockSystemUser;
+import org.springframework.stereotype.Repository;
 
 /**
 * @author bananaa
@@ -8,6 +9,7 @@ import com.citi.stock.entity.StockSystemUser;
 * @createDate 2023-03-01 22:26:11
 * @Entity com.citi.stock.entity.StockSystemUser
 */
+@Repository
 public interface StockSystemUserMapper {
 
     int deleteByPrimaryKey(Long id);
@@ -21,5 +23,5 @@ public interface StockSystemUserMapper {
     int updateByPrimaryKeySelective(StockSystemUser record);
 
     int updateByPrimaryKey(StockSystemUser record);
-
+    StockSystemUser findByUserName(String username);
 }

@@ -21,6 +21,14 @@
         where  stocksystemuser_id = #{stocksystemuserId,jdbcType=INTEGER} 
     </select>
 
+    <select id="findByUserName"  parameterType="String" resultMap="BaseResultMap">
+        select
+        *
+        from stock_system_user
+        where  stocksystemuser_name = #{stocksystemuserName,jdbcType=VARCHAR}
+    </select>
+
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from stock_system_user
         where  stocksystemuser_id = #{stocksystemuserId,jdbcType=INTEGER} 
@@ -64,4 +72,6 @@
             stocksystemuser_pasword =  #{stocksystemuserPasword,jdbcType=VARCHAR}
         where   stocksystemuser_id = #{stocksystemuserId,jdbcType=INTEGER} 
     </update>
+
+
 </mapper>
