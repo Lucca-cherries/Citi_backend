@@ -1,14 +1,15 @@
 package com.citi.stock.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.citi.stock.service.IStockService;
 import com.citi.stock.util.Finnhub;
 import com.citi.stock.util.StockLatestVOWithTotal;
-import com.citi.stock.vo.StockLatestVO;
 import com.citi.stock.vo.StockVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RequestMapping("/api/stocks")
@@ -39,6 +40,11 @@ public class StockController {
         assert finnhubList.size() == stockVOList.size(): "获取实时股票api和数据库列表数量不一致";
 
         return new StockLatestVOWithTotal(total, stockVOList, finnhubList);
+    }
+
+    @GetMapping("/{stockCode}")
+    public Finnhub showDetailOfOne(@PathVariable("stockCode") String stockCode){
+        return iStockService.getFinnhub(Collections.singletonList(stockCode)).get(0);
     }
 
 }
