@@ -14,4 +14,9 @@ public class StockLatestVO {
     private StockVO stockVO;
 
     private Finnhub finnhub;
+
+    StockLatestVO(StockVO stockVO, Finnhub finnhub){
+        this.stockVO = stockVO;
+        this.finnhub = finnhub;
+    }
 }

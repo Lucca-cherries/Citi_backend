@@ -1,15 +1,14 @@
 package com.citi.stock.controller;
 
-import com.citi.stock.entity.Stock;
-import com.citi.stock.entity.StockRecordHistory;
 import com.citi.stock.service.IStockService;
-import com.citi.stock.util.Page;
-import com.citi.stock.util.StockVOWithTotal;
+import com.citi.stock.util.Finnhub;
+import com.citi.stock.util.StockLatestVOWithTotal;
+import com.citi.stock.vo.StockLatestVO;
 import com.citi.stock.vo.StockVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/api/stocks")
@@ -19,13 +18,27 @@ public class StockController {
     private IStockService iStockService;
 
     @GetMapping("")
-    public StockVOWithTotal showDashboard(
+    public StockLatestVOWithTotal showDashboard(
             @RequestParam("page") Integer page,
             @RequestParam("size") Integer size){
+        // 从数据库获取一部分静态信息
         Integer total = iStockService.getTotalNumOfStocks();
-        List<StockVO> stockVOList = iStockService.selectStockVOByPage(1, page, size);
-        StockVOWithTotal stockVOWithTotal = new StockVOWithTotal(total, stockVOList);
-        return stockVOWithTotal;
+        List<StockVO> stockVOList = iStockService.getStockVOByPage(1, page, size);
+
+        // 从stockVOList中获取code列表
+        List<String> stockCodes = new ArrayList<>();
+        for (StockVO stockVO: stockVOList){
+            stockCodes.add(stockVO.getStockCode());
+        }
+        // 请求finnhub api获取最新动态信息
+        List<Finnhub> finnhubList = iStockService.getFinnhub(stockCodes);
+
+        // 最终展示在前端的股票最新信息，由三个部分构成：
+        // 1.总数 2.分页股票数据库信息 3.分页股票api信息
+        // 确保2和3有相同的元素个数
+        assert finnhubList.size() == stockVOList.size(): "获取实时股票api和数据库列表数量不一致";
+
+        return new StockLatestVOWithTotal(total, stockVOList, finnhubList);
     }
 
 }

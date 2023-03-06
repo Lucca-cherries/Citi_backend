@@ -1,10 +1,10 @@
 package com.citi.stock.service;
 
-import com.citi.stock.vo.StockVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,11 +25,20 @@ public class StockServiceTests {
 
     @Test
     public void selectStockVOByPage() {
-        System.err.println(iStockService.selectStockVOByPage(1, 1*2, 2));
+        System.err.println(iStockService.getStockVOByPage(1, 1*2, 2));
     }
 
     @Test
     public void getTotalNumOfStocks(){
         System.err.println(iStockService.getTotalNumOfStocks());
+    }
+
+    @Test
+    public void getStockLastestVO(){
+        List<String> stockCodes = new ArrayList<>();
+        stockCodes.add("AAPL");
+        stockCodes.add("MSFT");
+        stockCodes.add("GOOG");
+        System.err.println(iStockService.getFinnhub(stockCodes));
     }
 }
