@@ -20,10 +20,10 @@ public class StockRecordHistoryController {
     @GetMapping("/{stockCode}")
     public List<StockRecordHistory> getHistoryOfAStock(
             @PathVariable("stockCode") String stockCode){
-        System.err.println(stockCode);
+//        System.err.println(stockCode);
         List<StockRecordHistory> historyList =
                 iStockRecordHistoryService.getiHistotyOfAStock(stockCode);
-        System.err.println(historyList);
+//        System.err.println(historyList);
         return historyList;
     }
 }

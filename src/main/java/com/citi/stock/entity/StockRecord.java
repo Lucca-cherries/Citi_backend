@@ -9,6 +9,7 @@ import lombok.Data;
  * @TableName stock_record
  */
 @Data
+// 应该用不上了
 public class StockRecord implements Serializable {
     private Integer stockrecordId;
 
