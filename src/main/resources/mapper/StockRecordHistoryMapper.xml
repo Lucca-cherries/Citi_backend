@@ -43,7 +43,25 @@
         ,#{stockrecordOpenPrice,jdbcType=DECIMAL},#{stockrecordEndPrice,jdbcType=DECIMAL},#{stockrecordLow,jdbcType=DECIMAL}
         ,#{stockrecordHigh,jdbcType=DECIMAL},#{stockrecordVolume,jdbcType=DOUBLE})
     </insert>
-
+    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true">
+        insert into stock_record_history
+        ( stockrecord_id,stock_code,stockrecord_date
+        ,stockrecord_open_price,stockrecord_end_price,stockrecord_low
+        ,stockrecord_high,stockrecord_volume)
+        values
+        <foreach collection="list" item="StockRecordHistory" separator=",">
+            (
+            #{StockRecordHistory.stockrecordId},
+            #{StockRecordHistory.stockCode},
+            #{StockRecordHistory.stockrecordDate},
+            #{StockRecordHistory.stockrecordOpenPrice},
+            #{StockRecordHistory.stockrecordEndPrice},
+            #{StockRecordHistory.stockrecordLow},
+            #{StockRecordHistory.stockrecordHigh},
+            #{StockRecordHistory.stockrecordVolume}
+            )
+        </foreach>
+    </insert>
 
 
 </mapper>

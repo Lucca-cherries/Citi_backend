@@ -14,18 +14,13 @@ import java.util.List;
 @Repository
 public interface StockRecordHistoryMapper {
 
-//    int deleteByPrimaryKey(Long id);
-
     int insert(StockRecordHistory record);
 
-//    int insertSelective(StockRecordHistory record);
 
     StockRecordHistory selectByPrimaryKey(Long id);
 
-//    int updateByPrimaryKeySelective(StockRecordHistory record);
-
-//    int updateByPrimaryKey(StockRecordHistory record);
-
     List<StockRecordHistory> selectByStockCode(String stockCode);
+
+    int insertBatch(List<StockRecordHistory> historyList);
 
 }

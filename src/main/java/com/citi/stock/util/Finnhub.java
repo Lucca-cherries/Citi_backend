@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * 用于封装Finnhub上面获得的某条股票的最新信息
@@ -30,6 +29,6 @@ public class Finnhub {
         this.low = l;
         this.open = o;
         this.preClose = pc;
-        this.date = timeStamp.timeStamp2Date(t, null);
+        this.date = Timestamp.timeStamp2Date(t, null);
     }
 }

@@ -14,10 +14,15 @@ public class StockRecordHistoryServiceImpl implements IStockRecordHistoryService
     private StockRecordHistoryMapper stockRecordHistoryMapper;
 
     @Override
-    public List<StockRecordHistory> getiHistotyOfAStock(String stockCode) {
+    public List<StockRecordHistory> getHistotyOfAStock(String stockCode) {
         List<StockRecordHistory> historyList =
                 stockRecordHistoryMapper.selectByStockCode(stockCode);
         System.err.println("Length of stock histoty:" + historyList.size());
         return historyList;
+    }
+
+    @Override
+    public Integer addHistoryRecordsBatch(List<StockRecordHistory> historyList) {
+        return stockRecordHistoryMapper.insertBatch(historyList);
     }
 }
