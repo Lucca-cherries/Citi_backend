@@ -27,6 +27,7 @@ public class JWTUtils {
         instance.add(Calendar.DATE, 7);
 
         JWTCreator.Builder builder = JWT.create();
+//        System.err.println("encode: " + u.getStocksystemuserId());
         builder.withClaim("userId", u.getStocksystemuserId())
                 .withClaim("username", u.getStocksystemuserName());
 

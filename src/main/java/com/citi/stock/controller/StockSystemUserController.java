@@ -62,26 +62,12 @@ public class StockSystemUserController {
     @GetMapping ("/login")
     public JsonResult<String> login(@RequestParam("email") String email, @RequestParam("pwd") String pwd) {
         StockSystemUser data = stockSystemUserService.login(email, pwd);
-        String token = JWTUtils.getToken(data);
+//        System.err.println("login:" + data);
+        String token = JWTUtils.getToken(data); // 有id
 
         return new JsonResult<>(200, token);
     }
-    /*
-     * @description 修改密码接口
-     * @param null
-     * @return
-     * @author: Li
-     * @date: 2023/3/6
-     */
 
-//    @PutMapping  ("/change_pwd")
-//    @ResponseBody
-//    public JsonResult<Void> changePassword(Integer uid, String oldPwd,String newPwd) {
-//        JsonResult<Void> result = new JsonResult<Void>();
-//        stockSystemUserService.changePassword(uid, oldPwd, newPwd);
-//        result.setState(200);
-//        return result;
-//    }
 
     /*
      * @description 用户注销接口

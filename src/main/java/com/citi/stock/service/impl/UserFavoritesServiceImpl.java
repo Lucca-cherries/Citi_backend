@@ -14,17 +14,17 @@ public class UserFavoritesServiceImpl implements IUserFavoritesRelationService {
     private UserFavoritesRelationMapper userFavoritesRelationMapper;
 
     @Override
-    public Integer addOneFavorite(UserFavoritesRelation userFavoritesRelation) {
-        return null;
+    public Integer addOneFavorite(UserFavoritesRelation record) {
+        return userFavoritesRelationMapper.insertOne(record);
     }
 
     @Override
     public List<UserFavoritesRelation> getFavoritesByUid(Integer uid) {
-        return null;
+        return userFavoritesRelationMapper.selectByUid(Long.valueOf(uid));
     }
 
     @Override
     public Integer deleteByUidAndCode(UserFavoritesRelation record) {
-        return null;
+        return userFavoritesRelationMapper.deleteByUidAndCode(record);
     }
 }

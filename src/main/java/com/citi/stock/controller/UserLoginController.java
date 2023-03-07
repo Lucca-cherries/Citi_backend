@@ -1,9 +1,14 @@
 package com.citi.stock.controller;
 
+import com.auth0.jwt.JWT;
 import com.citi.stock.entity.StockSystemUser;
 import com.citi.stock.util.JWTUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+
+import static com.citi.stock.util.JWTUtils.verify;
 
 /**
  * @author admin
@@ -30,7 +35,10 @@ public class UserLoginController {
     }
 
     @GetMapping("test")
-    public String test()  {
+    public String test(HttpServletRequest request)  {
+        // 测试了解析token中的字段
+        String token = request.getHeader("token");
+        System.out.println("Token 解析结果：" + JWT.decode(token).getClaim("userId").asString());
         return "访问test - API";
     }
 }
