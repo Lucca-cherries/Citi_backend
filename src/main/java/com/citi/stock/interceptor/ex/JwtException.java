@@ -1,4 +1,4 @@
-package com.citi.stock.util.ex;
+package com.citi.stock.interceptor.ex;
 
 /** 文件上传相关异常的基类 */
 public class JwtException extends RuntimeException {

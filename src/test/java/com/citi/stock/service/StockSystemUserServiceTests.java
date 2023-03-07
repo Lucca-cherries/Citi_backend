@@ -5,7 +5,7 @@ import com.citi.stock.service.ex.ServiceException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+
 /**
  * @author li
  * @description
@@ -22,7 +22,7 @@ public class StockSystemUserServiceTests {
 
             StockSystemUser stockSystemUser= StockSystemUser.builder()
                             .stocksystemuserName("u01")
-                            .stocksystemuserPasword("111")
+                            .stocksystemuserPassword("111")
                             .build();
 
 
@@ -37,12 +37,11 @@ public class StockSystemUserServiceTests {
     }
 
 
-
     @Test
     public void login() {
         try {
-            String name = "u02";
-            String pwd = "222";
+            String name = "u03";
+            String pwd = "333";
 
             StockSystemUser stockSystemUser=stockSystemUserService.login(name,pwd);
 
@@ -53,41 +52,11 @@ public class StockSystemUserServiceTests {
         }
     }
 
-
-    @Test
-    public void changePassword () {
-        try {
-
-            String oldPwd = "1111";
-            String newPwd = "222";
-            Integer uid=7;
-            stockSystemUserService.changePassword(uid,oldPwd,newPwd);
-
-            System.out.println("密码修改成功！");
-        } catch (ServiceException e) {
-            System.out.println("密码修改失败！" + e.getClass().getSimpleName());
-            System.out.println(e.getMessage());
-        }
-    }
-
-    @Test
-    public void changeInfo () {
-        try {
-            String newName = "u05";
-            Integer uid = 7;
-            stockSystemUserService.changeInfo(uid,newName);
-
-            System.out.println("用户名修改成功！");
-        } catch (ServiceException e) {
-            System.out.println("用户名修改失败！" + e.getClass().getSimpleName());
-            System.out.println(e.getMessage());
-        }
-    }
     @Test
     public void deleteUser(){
         try {
-            Integer uid = 7;
-            stockSystemUserService.deleteUser(uid);
+            String username = "彭敏";
+            stockSystemUserService.deleteUser(username);
 
             System.out.println("用户注销成功成功！");
         } catch (ServiceException e) {

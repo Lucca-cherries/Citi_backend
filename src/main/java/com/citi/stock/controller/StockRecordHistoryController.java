@@ -24,8 +24,6 @@ public class StockRecordHistoryController {
     @Autowired
     private IStockRecordHistoryService iStockRecordHistoryService;
 
-
-
     @GetMapping("/{stockCode}")
     public List<StockRecordHistory> getHistoryOfAStock(
             @PathVariable("stockCode") String stockCode){

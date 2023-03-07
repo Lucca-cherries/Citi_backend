@@ -7,19 +7,13 @@
     <resultMap id="BaseResultMap" type="com.citi.stock.entity.StockSystemUser">
             <id property="stocksystemuserId" column="stocksystemuser_id" jdbcType="INTEGER"/>
             <result property="stocksystemuserName" column="stocksystemuser_name" jdbcType="VARCHAR"/>
-            <result property="stocksystemuserPasword" column="stocksystemuser_pasword" jdbcType="VARCHAR"/>
+            <result property="stocksystemuserPassword" column="stocksystemuser_password" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        stocksystemuser_id,stocksystemuser_name,stocksystemuser_pasword
+        stocksystemuser_id,stocksystemuser_name,stocksystemuser_password
     </sql>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from stock_system_user
-        where  stocksystemuser_id = #{stocksystemuserId,jdbcType=INTEGER} 
-    </select>
 
     <select id="findByUserName"  parameterType="String" resultMap="BaseResultMap">
         select
@@ -29,49 +23,18 @@
     </select>
 
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <delete id="deleteByUsername" parameterType="String">
         delete from stock_system_user
-        where  stocksystemuser_id = #{stocksystemuserId,jdbcType=INTEGER} 
+        where  stocksystemuser_name = #{stocksystemuserName,jdbcType=VARCHAR}
     </delete>
+
     <insert id="insert" keyColumn="stocksystemuser_id" keyProperty="stocksystemuserId" parameterType="com.citi.stock.entity.StockSystemUser" useGeneratedKeys="true">
         insert into stock_system_user
-        ( stocksystemuser_id,stocksystemuser_name,stocksystemuser_pasword
+        ( stocksystemuser_id,stocksystemuser_name,stocksystemuser_password
         )
-        values (#{stocksystemuserId,jdbcType=INTEGER},#{stocksystemuserName,jdbcType=VARCHAR},#{stocksystemuserPasword,jdbcType=VARCHAR}
+        values (#{stocksystemuserId,jdbcType=INTEGER},#{stocksystemuserName,jdbcType=VARCHAR},#{stocksystemuserPassword,jdbcType=VARCHAR}
         )
     </insert>
-    <insert id="insertSelective" keyColumn="stocksystemuser_id" keyProperty="stocksystemuserId" parameterType="com.citi.stock.entity.StockSystemUser" useGeneratedKeys="true">
-        insert into stock_system_user
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="stocksystemuserId != null">stocksystemuser_id,</if>
-                <if test="stocksystemuserName != null">stocksystemuser_name,</if>
-                <if test="stocksystemuserPasword != null">stocksystemuser_pasword,</if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="stocksystemuserId != null">#{stocksystemuserId,jdbcType=INTEGER},</if>
-                <if test="stocksystemuserName != null">#{stocksystemuserName,jdbcType=VARCHAR},</if>
-                <if test="stocksystemuserPasword != null">#{stocksystemuserPasword,jdbcType=VARCHAR},</if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.citi.stock.entity.StockSystemUser">
-        update stock_system_user
-        <set>
-                <if test="stocksystemuserName != null">
-                    stocksystemuser_name = #{stocksystemuserName,jdbcType=VARCHAR},
-                </if>
-                <if test="stocksystemuserPasword != null">
-                    stocksystemuser_pasword = #{stocksystemuserPasword,jdbcType=VARCHAR},
-                </if>
-        </set>
-        where   stocksystemuser_id = #{stocksystemuserId,jdbcType=INTEGER} 
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.citi.stock.entity.StockSystemUser">
-        update stock_system_user
-        set 
-            stocksystemuser_name =  #{stocksystemuserName,jdbcType=VARCHAR},
-            stocksystemuser_pasword =  #{stocksystemuserPasword,jdbcType=VARCHAR}
-        where   stocksystemuser_id = #{stocksystemuserId,jdbcType=INTEGER} 
-    </update>
 
 
 </mapper>

@@ -4,6 +4,7 @@ import com.citi.stock.entity.StockSystemUser;
 import com.citi.stock.service.IStockSystemUserService;
 import com.citi.stock.service.ex.InsertException;
 import com.citi.stock.service.ex.UsernameDuplicateException;
+import com.citi.stock.util.JWTUtils;
 import com.citi.stock.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class StockSystemUserController {
     @Autowired
     private IStockSystemUserService stockSystemUserService;
@@ -24,10 +25,9 @@ public class StockSystemUserController {
      * @author: Li
      * @date: 2023/3/5
      */
-    @PostMapping("/register")
-    @ResponseBody
-    public JsonResult<Void> register(StockSystemUser stockSystemUser) {
-        JsonResult<Void> result = new JsonResult<Void>();
+    @PostMapping("")
+    public JsonResult<Void> register(@RequestBody StockSystemUser stockSystemUser) {
+        JsonResult<Void> result = new JsonResult<>();
         try {
             // 调用业务对象执行注册
             stockSystemUserService.register(stockSystemUser);
@@ -46,19 +46,25 @@ public class StockSystemUserController {
     }
     /*
      * @description 用户登录接口
-     * @param name
+     * @param emali
      * @param pwd
      * @return com.citi.stock.util.JsonResult<com.citi.stock.entity.StockSystemUser>
      * @author: Li
      * @date: 2023/3/6
      */
+
+    /**
+     * 用户登录
+     * @param email 用户邮箱
+     * @param pwd 用户密码
+     * @return 返回token和HTTP状态
+     */
     @GetMapping ("/login")
-    @ResponseBody
-    public JsonResult<StockSystemUser> login(String name, String pwd) {
+    public JsonResult<String> login(@RequestParam("email") String email, @RequestParam("pwd") String pwd) {
+        StockSystemUser data = stockSystemUserService.login(email, pwd);
+        String token = JWTUtils.getToken(data);
 
-        StockSystemUser data = stockSystemUserService.login(name, pwd);
-
-        return new JsonResult<StockSystemUser>(200, data);
+        return new JsonResult<>(200, token);
     }
     /*
      * @description 修改密码接口
@@ -68,30 +74,15 @@ public class StockSystemUserController {
      * @date: 2023/3/6
      */
 
-    @PutMapping  ("/change_pwd")
-    @ResponseBody
-    public JsonResult<Void> changePassword(Integer uid, String oldPwd,String newPwd) {
-        JsonResult<Void> result = new JsonResult<Void>();
-        stockSystemUserService.changePassword(uid, oldPwd, newPwd);
-        result.setState(200);
-        return result;
-    }
-    /*
-     * @description 修改用户名接口
-     * @param uid
-     * @param newName
-     * @return com.citi.stock.util.JsonResult<java.lang.Void>
-     * @author: Li
-     * @date: 2023/3/6
-     */
-    @PutMapping  ("/change_info")
-    @ResponseBody
-    public JsonResult<Void> changeInfo(Integer uid,String newName) {
-        JsonResult<Void> result = new JsonResult<Void>();
-        stockSystemUserService.changeInfo(uid,newName);
-        result.setState(200);
-        return result;
-    }
+//    @PutMapping  ("/change_pwd")
+//    @ResponseBody
+//    public JsonResult<Void> changePassword(Integer uid, String oldPwd,String newPwd) {
+//        JsonResult<Void> result = new JsonResult<Void>();
+//        stockSystemUserService.changePassword(uid, oldPwd, newPwd);
+//        result.setState(200);
+//        return result;
+//    }
+
     /*
      * @description 用户注销接口
      * @param uid
@@ -99,11 +90,11 @@ public class StockSystemUserController {
      * @author: Li
      * @date: 2023/3/6
      */
-    @DeleteMapping   ("/delete_a_user/{uid}")
+    @DeleteMapping("/{username}")
     @ResponseBody
-    public JsonResult<Void> deleteUser(@PathVariable("uid") Integer uid) {
-        JsonResult<Void> result = new JsonResult<Void>();
-        stockSystemUserService.deleteUser(uid);
+    public JsonResult<Void> deleteUser(@PathVariable("username") String username) {
+        JsonResult<Void> result = new JsonResult<>();
+        stockSystemUserService.deleteUser(username);
         result.setState(200);
         return result;
     }

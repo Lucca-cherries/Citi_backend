@@ -12,16 +12,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StockSystemUserMapper {
 
-    int deleteByPrimaryKey(Long id);
+    int deleteByUsername(String username);
 
     int insert(StockSystemUser record);
 
-    int insertSelective(StockSystemUser record);
-
-    StockSystemUser selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(StockSystemUser record);
-
-    int updateByPrimaryKey(StockSystemUser record);
     StockSystemUser findByUserName(String username);
+
 }
