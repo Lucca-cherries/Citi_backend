@@ -37,7 +37,7 @@ public class UserFavoritesController extends BaseController {
                         .userfavoritesUserId(uid)
                         .userfavoritesStockCode(stockCode)
                         .build());
-        return new JsonResult<>(200);
+        return new JsonResult<>(OK);
     }
 
     @DeleteMapping("/{stockCode}")
@@ -50,6 +50,6 @@ public class UserFavoritesController extends BaseController {
                         .userfavoritesUserId(uid)
                         .userfavoritesStockCode(stockCode)
                         .build());
-        return new JsonResult<>(200);
+        return new JsonResult<>(OK);
     }
 }

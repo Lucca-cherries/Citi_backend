@@ -28,4 +28,13 @@ public class StockRecordHistoryMapperTests {
 
         System.err.println(stockRecordHistoryMapper.insertBatch(historyList));
     }
+
+    @Test
+    public void insert(){
+        StockRecordHistory stockRecordHistory = StockRecordHistory.builder()
+                .stockCode("jgq")
+                .build();
+
+        assert stockRecordHistoryMapper.insert(stockRecordHistory) == 1;
+    }
 }

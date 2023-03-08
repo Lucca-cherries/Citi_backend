@@ -35,4 +35,11 @@ public class StockRecordHistoryServiceTests {
 
         System.err.println(iStockRecordHistoryService.addHistoryRecordsBatch(historyList));
     }
+
+    @Test
+    public void insertOne(){
+        StockRecordHistory stockRecordHistory = StockRecordHistory.builder()
+                .stockCode("jgq_service").build();
+        assert iStockRecordHistoryService.insertOne(stockRecordHistory) == 1;
+    }
 }

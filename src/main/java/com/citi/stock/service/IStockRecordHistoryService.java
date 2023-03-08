@@ -18,4 +18,6 @@ public interface IStockRecordHistoryService {
      * @return 影响（插入）的行数
      */
     Integer addHistoryRecordsBatch(List<StockRecordHistory> historyList);
+
+    Integer insertOne(StockRecordHistory stockRecordHistory);
 }

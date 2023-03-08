@@ -16,7 +16,7 @@ import java.util.List;
 public interface StockRecordHistoryMapper {
 
     /**
-     * 插入一条股票历史记录，暂未使用
+     * 插入一条股票历史记录
      * @param record 股票历史记录
      * @return 影响的行数
      */
@@ -35,5 +35,6 @@ public interface StockRecordHistoryMapper {
      * @return 影响的行数
      */
     int insertBatch(List<StockRecordHistory> historyList);
+
 
 }

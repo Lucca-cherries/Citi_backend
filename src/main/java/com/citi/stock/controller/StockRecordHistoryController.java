@@ -4,6 +4,7 @@ import com.citi.stock.controller.ex.FileEmptyException;
 import com.citi.stock.controller.ex.FileUploadException;
 import com.citi.stock.entity.StockRecordHistory;
 import com.citi.stock.service.IStockRecordHistoryService;
+import com.citi.stock.util.JsonResult;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.apache.commons.beanutils.ConvertUtils;
@@ -68,5 +69,12 @@ public class StockRecordHistoryController extends BaseController {
         }
 
         return "file-uploaded";
+    }
+
+    @PostMapping
+    public JsonResult<Void> addOneHistoryRecord(@RequestBody StockRecordHistory stockRecordHistory){
+        System.err.println("add" + stockRecordHistory);
+        iStockRecordHistoryService.insertOne(stockRecordHistory);
+        return new JsonResult<>(OK);
     }
 }

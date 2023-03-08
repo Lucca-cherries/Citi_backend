@@ -26,4 +26,9 @@ public class StockRecordHistoryServiceImpl implements IStockRecordHistoryService
     public Integer addHistoryRecordsBatch(List<StockRecordHistory> historyList) {
         return stockRecordHistoryMapper.insertBatch(historyList);
     }
+
+    @Override
+    public Integer insertOne(StockRecordHistory stockRecordHistory) {
+        return stockRecordHistoryMapper.insert(stockRecordHistory);
+    }
 }
