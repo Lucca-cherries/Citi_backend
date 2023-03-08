@@ -34,11 +34,21 @@ public class StockServiceTests {
     }
 
     @Test
-    public void getStockLastestVO(){
+    public void getStockLatestVO(){
         List<String> stockCodes = new ArrayList<>();
         stockCodes.add("AAPL");
         stockCodes.add("MSFT");
         stockCodes.add("GOOG");
         System.err.println(iStockService.getFinnhub(stockCodes));
+    }
+
+    @Test
+    public void getStockVOByCode(){
+        System.err.println(iStockService.getStockVOByCode(1, "AAPL"));
+    }
+
+    @Test
+    public void getStockLatestVOofOne(){
+        System.err.println(iStockService.getStockLatestVOofOne(1, "AAPL"));
     }
 }

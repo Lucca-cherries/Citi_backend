@@ -1,13 +1,16 @@
 package com.citi.stock.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.auth0.jwt.JWT;
 import com.citi.stock.service.IStockService;
 import com.citi.stock.util.Finnhub;
 import com.citi.stock.util.StockLatestVOWithTotal;
+import com.citi.stock.vo.StockLatestVO;
 import com.citi.stock.vo.StockVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,8 +46,10 @@ public class StockController {
     }
 
     @GetMapping("/{stockCode}")
-    public Finnhub showDetailOfOne(@PathVariable("stockCode") String stockCode){
-        return iStockService.getFinnhub(Collections.singletonList(stockCode)).get(0);
+    public StockLatestVO showDetailOfOne(HttpServletRequest request, @PathVariable("stockCode") String stockCode){
+        Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
+
+        return iStockService.getStockLatestVOofOne(uid, stockCode);
     }
 
 }

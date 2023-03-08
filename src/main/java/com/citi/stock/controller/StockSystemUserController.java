@@ -44,14 +44,6 @@ public class StockSystemUserController {
         }
         return result;
     }
-    /*
-     * @description 用户登录接口
-     * @param emali
-     * @param pwd
-     * @return com.citi.stock.util.JsonResult<com.citi.stock.entity.StockSystemUser>
-     * @author: Li
-     * @date: 2023/3/6
-     */
 
     /**
      * 用户登录

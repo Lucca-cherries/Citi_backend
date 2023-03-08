@@ -18,7 +18,7 @@ public interface StockMapper {
 
     int insert(Stock record);
 
-    Stock selectByPrimaryKey(Long id);
+//    Stock selectByPrimaryKey(Long id);
 
     Integer getTotalNum();
 
@@ -32,4 +32,12 @@ public interface StockMapper {
      * @return 最新股票持久层数据list
      */
     List<StockVO> selectStockVOByPage(Integer uid, Integer start, Integer size);
+
+    /**
+     * 从url中直接指定具体股票code，查找svg，isFavorite等资料
+     * @param uid 用户id
+     * @param code 股票symbol
+     * @return 该股票的详细信息，包含svg
+     */
+    StockVO selectStockVOByCode(Integer uid, String code);
 }

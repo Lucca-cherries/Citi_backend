@@ -48,4 +48,18 @@ public class StockServiceImpl implements IStockService {
         }
         return finnhubList;
     }
+
+    @Override
+    public StockVO getStockVOByCode(Integer uid, String code) {
+        return stockMapper.selectStockVOByCode(uid, code);
+    }
+
+    @Override
+    public StockLatestVO getStockLatestVOofOne(Integer uid, String code) {
+        StockVO stockVO = getStockVOByCode(uid, code);
+        List<String> singleCode = new ArrayList<>();
+        singleCode.add(code);
+        Finnhub finnhub = getFinnhub(singleCode).get(0);
+        return new StockLatestVO(stockVO, finnhub);
+    }
 }
