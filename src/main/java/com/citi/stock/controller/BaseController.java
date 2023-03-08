@@ -4,6 +4,7 @@ package com.citi.stock.controller;
 import com.citi.stock.controller.ex.FileEmptyException;
 import com.citi.stock.controller.ex.FileUploadException;
 import com.citi.stock.interceptor.ex.JwtException;
+import com.citi.stock.service.ex.PasswordNotMatchException;
 import com.citi.stock.service.ex.ServiceException;
 import com.citi.stock.util.JsonResult;
 import org.apache.tomcat.util.http.fileupload.impl.FileUploadIOException;
@@ -29,6 +30,9 @@ public class BaseController {
         } else if (e instanceof JwtException) {
             result.setState(7000);
             result.setMessage("用户token验证异常");
+        } else if (e instanceof PasswordNotMatchException) {
+            result.setState(5000);
+            result.setMessage("密码错误");
         }
         return result;
     }

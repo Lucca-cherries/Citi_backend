@@ -57,10 +57,10 @@ public class StockSystemUserController extends BaseController {
     @GetMapping ("/login")
     public JsonResult<String> login(@RequestParam("email") String email, @RequestParam("pwd") String pwd) {
         StockSystemUser data = stockSystemUserService.login(email, pwd);
-        System.err.println("用户登录");
+        System.err.println("用户" + email + "登录");
         String token = JWTUtils.getToken(data); // 有id
 
-        return new JsonResult<>(200, token);
+        return new JsonResult<>(OK, token);
     }
 
 
@@ -79,7 +79,7 @@ public class StockSystemUserController extends BaseController {
 
         JsonResult<Void> result = new JsonResult<>();
         stockSystemUserService.deleteUser(uid, username);
-        result.setState(200);
+        result.setState(OK);
         return result;
     }
 

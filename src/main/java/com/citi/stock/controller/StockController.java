@@ -53,8 +53,8 @@ public class StockController extends BaseController {
 
     @GetMapping("/{stockCode}")
     public JsonResult<StockLatestVO> showDetailOfOne(HttpServletRequest request, @PathVariable("stockCode") String stockCode){
+        System.err.println("加载" + stockCode + "详情");
         Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
-
         return new JsonResult<>(OK, iStockService.getStockLatestVOofOne(uid, stockCode));
 
 //        return iStockService.getStockLatestVOofOne(uid, stockCode);

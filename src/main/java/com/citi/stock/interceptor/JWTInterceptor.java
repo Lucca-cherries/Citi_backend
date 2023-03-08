@@ -31,6 +31,7 @@ public class JWTInterceptor implements HandlerInterceptor {
     private StockSystemUserMapper stockSystemUserMapper;
 
     @Override
+    // 如果接口被拦截，控制层接受请求之前会执行这个函数
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws JwtException {
         String token = request.getHeader("token");
@@ -39,6 +40,7 @@ public class JWTInterceptor implements HandlerInterceptor {
         }
         try {
             String username = JWT.decode(request.getHeader("token")).getClaim("username").asString();
+            System.err.println("User " + username + " is verifying the token: " + token);
             String pwd = stockSystemUserMapper.findByUserName(username).getStocksystemuserPassword();
             JWTUtils.verify(token, pwd);
         } catch (SignatureVerificationException e) {

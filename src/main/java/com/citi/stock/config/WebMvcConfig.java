@@ -25,12 +25,13 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new JWTInterceptor())
-                //拦截的路径，注意一定要合理设置拦截器
-                .addPathPatterns("/api/users/*") // 注销用户
-                .addPathPatterns("/api/favorites")
-                .addPathPatterns("/api/stocks")
+        registry.addInterceptor(getJwtFilter()) // 这里必须要用get不能用new，否则会出之前null的问题
+//                //拦截的路径，注意一定要合理设置拦截器
+//                .addPathPatterns("/api/users/*") // 注销用户
+//                .addPathPatterns("/api/favorites")
+//                .addPathPatterns("/api/stocks")
                 //排除接口
+                .excludePathPatterns("/api/stocks")
                 .excludePathPatterns("/api/users/reg")
                 .excludePathPatterns("/api/users/login");
     }
