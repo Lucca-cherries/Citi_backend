@@ -30,6 +30,6 @@ public interface IStockSystemUserService {
      * @author: Li
      * @date: 2023/3/5
      */
-    void deleteUser(String username);
+    void deleteUser(Integer uid, String username);
 
 }

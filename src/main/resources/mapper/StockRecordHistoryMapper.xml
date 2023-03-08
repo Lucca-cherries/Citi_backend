@@ -21,12 +21,7 @@
         stockrecord_high,stockrecord_volume
     </sql>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from stock_record_history
-        where  stockrecord_id = #{stockrecordId,jdbcType=INTEGER} 
-    </select>
+
     <select id="selectByStockCode" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />

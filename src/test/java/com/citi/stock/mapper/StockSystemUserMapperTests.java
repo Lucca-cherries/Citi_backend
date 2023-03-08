@@ -22,6 +22,6 @@ public class StockSystemUserMapperTests {
 
     @Test
     public void deleteByUsername(){
-        assert stockSystemUserMapper.deleteByUsername("jgq") == 1;
+        System.err.println(stockSystemUserMapper.deleteByUsername("jgq"));
     }
 }

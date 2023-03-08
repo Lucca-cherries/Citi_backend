@@ -63,10 +63,17 @@ public class StockSystemUserServiceImpl implements IStockSystemUserService{
      * @date: 2023/3/6
      */
     @Override
-    public void deleteUser(String username) {
-        int rows=stockSystemUserMapper.deleteByUsername(username);
-        if (rows != 1) {
-            throw new UpdateException("注销用户失败，请联系系统管理员");
+    public void deleteUser(Integer uid, String username) {
+        // 获取原用户id
+        Integer originalUid = stockSystemUserMapper.findByUserName(username).getStocksystemuserId();
+        // 只有原用户id和token用户id匹配才能执行删除功能
+        if (uid.equals(originalUid)){
+            int rows=stockSystemUserMapper.deleteByUsername(username);
+            if (rows != 1) {
+                throw new UpdateException("注销用户失败，请联系系统管理员");
+            }
+        } else {
+            throw new UpdateException("权限不足");
         }
     }
 }

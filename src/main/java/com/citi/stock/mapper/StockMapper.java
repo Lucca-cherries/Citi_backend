@@ -16,12 +16,25 @@ import java.util.List;
 @Repository
 public interface StockMapper {
 
+    /**
+     * 插入一只股票
+     * @param record 股票
+     * @return 影响的行数
+     */
     int insert(Stock record);
 
-//    Stock selectByPrimaryKey(Long id);
-
+    /**
+     * 获取数据库中股票的个数
+     * @return 数据库中股票的个数
+     */
     Integer getTotalNum();
 
+    /**
+     * 分页查询股票
+     * @param start 起始页
+     * @param offset 一页有多少条记录
+     * @return 分页擦汗寻结果
+     */
     List<Stock> selectByPage(Integer start, Integer offset);
 
     /**

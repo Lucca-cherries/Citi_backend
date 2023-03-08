@@ -1,5 +1,6 @@
 package com.citi.stock.controller;
 
+import com.auth0.jwt.JWT;
 import com.citi.stock.entity.StockSystemUser;
 import com.citi.stock.service.IStockSystemUserService;
 import com.citi.stock.service.ex.InsertException;
@@ -9,6 +10,7 @@ import com.citi.stock.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -70,9 +72,11 @@ public class StockSystemUserController {
      */
     @DeleteMapping("/{username}")
     @ResponseBody
-    public JsonResult<Void> deleteUser(@PathVariable("username") String username) {
+    public JsonResult<Void> deleteUser(HttpServletRequest request, @PathVariable("username") String username) {
+        Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
+
         JsonResult<Void> result = new JsonResult<>();
-        stockSystemUserService.deleteUser(username);
+        stockSystemUserService.deleteUser(uid, username);
         result.setState(200);
         return result;
     }

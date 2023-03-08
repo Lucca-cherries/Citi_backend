@@ -55,8 +55,8 @@ public class StockSystemUserServiceTests {
     @Test
     public void deleteUser(){
         try {
-            String username = "彭敏";
-            stockSystemUserService.deleteUser(username);
+            String username = "u01";
+            stockSystemUserService.deleteUser(1, username);
 
             System.out.println("用户注销成功成功！");
         } catch (ServiceException e) {

@@ -12,10 +12,25 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StockSystemUserMapper {
 
+    /**
+     * 根据用户名删除用户（用户名不重复）
+     * @param username 用户名
+     * @return 影响的行数
+     */
     int deleteByUsername(String username);
 
+    /**
+     * 插入一条用户信息
+     * @param record 用户信息
+     * @return 影响的行数
+     */
     int insert(StockSystemUser record);
 
+    /**
+     * 根据用户名查找用户信息
+     * @param username 用户名
+     * @return 用户信息
+     */
     StockSystemUser findByUserName(String username);
 
 }
