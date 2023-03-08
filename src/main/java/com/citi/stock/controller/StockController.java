@@ -17,6 +17,7 @@ import java.util.List;
 
 @RequestMapping("/api/stocks")
 @RestController
+//@CrossOrigin
 public class StockController extends BaseController {
     @Autowired
     private IStockService iStockService;

@@ -20,6 +20,7 @@ import java.util.List;
 
 @RequestMapping("/api/stockhistories")
 @RestController
+//@CrossOrigin
 public class StockRecordHistoryController extends BaseController {
     @Autowired
     private IStockRecordHistoryService iStockRecordHistoryService;

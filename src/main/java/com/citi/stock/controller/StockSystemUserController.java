@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/users")
+//@CrossOrigin
 public class StockSystemUserController extends BaseController {
     @Autowired
     private IStockSystemUserService stockSystemUserService;
@@ -73,6 +74,7 @@ public class StockSystemUserController extends BaseController {
     @DeleteMapping("/{username}")
     @ResponseBody
     public JsonResult<Void> deleteUser(HttpServletRequest request, @PathVariable("username") String username) {
+        System.err.println("用户注销");
         Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
 
         JsonResult<Void> result = new JsonResult<>();

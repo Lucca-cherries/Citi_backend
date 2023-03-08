@@ -27,9 +27,15 @@
         from stock
     </select>
 
+<!--    记录一个bug，收藏表中的symbol出现多次时这里搜到的结果symbol也会重复，应该是左连接的问题-->
     <select id="selectStockVOByPage" resultType="com.citi.stock.vo.StockVO">
+--         select stock_code, stock_name, stock_svg, IFNULL(userfavorites_user_id=#{uid},0)
+--         from stock left join user_favorites_relation
+--         on stock_code = userfavorites_stock_code
         select stock_code, stock_name, stock_svg, IFNULL(userfavorites_user_id=1,0)
-        from stock left join user_favorites_relation
+        from stock left join (select *
+                              from user_favorites_relation
+                              where userfavorites_user_id=1) as favo
         on stock_code = userfavorites_stock_code
         limit #{size} offset #{start}
     </select>

@@ -12,6 +12,7 @@ import java.util.List;
 
 @RequestMapping("/api/favorites")
 @RestController
+//@CrossOrigin
 public class UserFavoritesController extends BaseController {
     @Autowired
     private IUserFavoritesRelationService iUserFavoritesRelationService;
