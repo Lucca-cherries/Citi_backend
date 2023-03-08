@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static com.citi.stock.util.JWTUtils.verify;
-
 /**
  * @author admin
  */
@@ -17,10 +15,10 @@ import static com.citi.stock.util.JWTUtils.verify;
 @RequestMapping("user")
 public class UserLoginController {
 
-    @Value("${Login.username}")
+//    @Value("${Login.username}")
     private String realUsername;
 
-    @Value("${Login.password}")
+//    @Value("${Login.password}")
     private String realPassword;
 
     @PostMapping("login")

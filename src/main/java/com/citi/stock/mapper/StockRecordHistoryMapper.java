@@ -1,6 +1,7 @@
 package com.citi.stock.mapper;
 
 import com.citi.stock.entity.StockRecordHistory;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 * @createDate 2023-03-06 09:50:22
 * @Entity com.citi.stock.entity.StockRecordHistory
 */
-@Repository
+
 public interface StockRecordHistoryMapper {
 
     /**

@@ -1,5 +1,6 @@
 package com.citi.stock.service.ex;
 
+/** 业务异常的基类 */
 public class ServiceException extends RuntimeException {
     public ServiceException() {
         super();

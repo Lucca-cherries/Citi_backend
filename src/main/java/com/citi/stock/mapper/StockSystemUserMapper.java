@@ -1,6 +1,7 @@
 package com.citi.stock.mapper;
 
 import com.citi.stock.entity.StockSystemUser;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -8,8 +9,7 @@ import org.springframework.stereotype.Repository;
 * @description 针对表【stock_system_user】的数据库操作Mapper
 * @createDate 2023-03-01 22:26:11
 * @Entity com.citi.stock.entity.StockSystemUser
-*/
-@Repository
+ */
 public interface StockSystemUserMapper {
 
     /**

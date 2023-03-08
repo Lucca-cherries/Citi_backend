@@ -7,6 +7,7 @@ import com.citi.stock.service.IStockService;
 import com.citi.stock.util.Finnhub;
 import com.citi.stock.vo.StockLatestVO;
 import com.citi.stock.vo.StockVO;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -16,6 +17,9 @@ import java.util.List;
 
 @Service
 public class StockServiceImpl implements IStockService {
+    @Autowired
+    private SqlSessionFactory sqlSessionFactory;
+
     @Autowired
     private StockMapper stockMapper;
     private RestTemplate restTemplate = new RestTemplate();

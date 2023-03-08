@@ -23,8 +23,8 @@ public class JWTUtils {
      */
     public static String getToken(StockSystemUser u) {
         Calendar instance = Calendar.getInstance();
-        //默认令牌过期时间7天
-        instance.add(Calendar.DATE, 7);
+        //默认令牌过期时间1天
+        instance.add(Calendar.DATE, 1);
 
         JWTCreator.Builder builder = JWT.create();
 //        System.err.println("encode: " + u.getStocksystemuserId());
@@ -38,20 +38,15 @@ public class JWTUtils {
     /**
      * 验证token合法性 成功返回token
      */
-    public static DecodedJWT verify(String token) throws JwtException {
+    public static DecodedJWT verify(String token, String password) throws JwtException {
         if(StringUtils.isEmpty(token)){
-            throw new JwtException("token不能为空");
+            throw new JwtException("utils: token不能为空");
         }
 
-        //获取登录用户真正的密码假如数据库查出来的是123456
-        String password = "admin";
+        //登录用户真正的密码
         JWTVerifier build = JWT.require(Algorithm.HMAC256(password)).build();
         return build.verify(token);
     }
 
-   /* public static void main(String[] args) {
-        DecodedJWT verify = verify("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTcxMDg1MDAsInVzZXJuYW1lIjoiYWRtaW4ifQ.geBEtpluViRUg66_P7ZisN3I_d4e32Wms8mFoBYM5f0");
-        System.out.println(verify.getClaim("password").asString());
-    }*/
 }
 

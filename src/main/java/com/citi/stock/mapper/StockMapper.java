@@ -3,6 +3,7 @@ package com.citi.stock.mapper;
 import com.citi.stock.entity.Stock;
 import com.citi.stock.vo.StockLatestVO;
 import com.citi.stock.vo.StockVO;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 * @createDate 2023-03-06 09:50:22
 * @Entity com.citi.stock.entity.Stock
 */
-@Repository
+
 public interface StockMapper {
 
     /**
@@ -53,4 +54,6 @@ public interface StockMapper {
      * @return 该股票的详细信息，包含svg
      */
     StockVO selectStockVOByCode(Integer uid, String code);
+
+//    List<StockVO> selectStockB
 }

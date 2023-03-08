@@ -1,6 +1,7 @@
 package com.citi.stock.mapper;
 
 import com.citi.stock.entity.UserFavoritesRelation;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 * @createDate 2023-03-06 10:00:25
 * @Entity com.citi.stock.entity.UserFavoritesRelation
 */
-@Repository
+
 public interface UserFavoritesRelationMapper {
 
     /**

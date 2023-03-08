@@ -1,9 +1,9 @@
 package com.citi.stock.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.auth0.jwt.JWT;
 import com.citi.stock.service.IStockService;
 import com.citi.stock.util.Finnhub;
+import com.citi.stock.util.JsonResult;
 import com.citi.stock.util.StockLatestVOWithTotal;
 import com.citi.stock.vo.StockLatestVO;
 import com.citi.stock.vo.StockVO;
@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
 
 @RequestMapping("/api/stocks")
 @RestController
-public class StockController {
+public class StockController extends BaseController {
     @Autowired
     private IStockService iStockService;
 
     @GetMapping("")
-    public StockLatestVOWithTotal showDashboard(
+    public JsonResult<StockLatestVOWithTotal> showDashboard(
             HttpServletRequest request,
             @RequestParam("page") Integer page,
             @RequestParam("size") Integer size){
@@ -45,14 +45,18 @@ public class StockController {
         // 确保2和3有相同的元素个数
         assert finnhubList.size() == stockVOList.size(): "获取实时股票api和数据库列表数量不一致";
 
-        return new StockLatestVOWithTotal(total, stockVOList, finnhubList);
+        return new JsonResult<>(OK, new StockLatestVOWithTotal(total, stockVOList, finnhubList));
+
+//        return new StockLatestVOWithTotal(total, stockVOList, finnhubList);
     }
 
     @GetMapping("/{stockCode}")
-    public StockLatestVO showDetailOfOne(HttpServletRequest request, @PathVariable("stockCode") String stockCode){
+    public JsonResult<StockLatestVO> showDetailOfOne(HttpServletRequest request, @PathVariable("stockCode") String stockCode){
         Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
 
-        return iStockService.getStockLatestVOofOne(uid, stockCode);
+        return new JsonResult<>(OK, iStockService.getStockLatestVOofOne(uid, stockCode));
+
+//        return iStockService.getStockLatestVOofOne(uid, stockCode);
     }
 
 }
