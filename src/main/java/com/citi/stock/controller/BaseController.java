@@ -6,6 +6,7 @@ import com.citi.stock.controller.ex.FileUploadException;
 import com.citi.stock.interceptor.ex.JwtException;
 import com.citi.stock.service.ex.PasswordNotMatchException;
 import com.citi.stock.service.ex.ServiceException;
+import com.citi.stock.service.ex.UserNotFoundException;
 import com.citi.stock.util.JsonResult;
 import org.apache.tomcat.util.http.fileupload.impl.FileUploadIOException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,6 +34,9 @@ public class BaseController {
         } else if (e instanceof PasswordNotMatchException) {
             result.setState(5000);
             result.setMessage("密码错误");
+        } else if (e instanceof UserNotFoundException) {
+            result.setState(5000);
+            result.setMessage("用户名不存在");
         }
         return result;
     }

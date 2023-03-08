@@ -31,7 +31,7 @@ public class StockSystemUserController extends BaseController {
     public JsonResult<Void> register(@RequestBody StockSystemUser stockSystemUser) {
         JsonResult<Void> result = new JsonResult<>();
         try {
-            System.err.println("新用户注册");
+            System.err.println("新用户注册：" + stockSystemUser.getStocksystemuserName());
             // 调用业务对象执行注册
             stockSystemUserService.register(stockSystemUser);
             // 响应成功
@@ -42,7 +42,7 @@ public class StockSystemUserController extends BaseController {
             result.setMessage("用户名已经被占用");
         } catch (InsertException e) {
             // 插入数据异常
-            result.setState(5000);
+            result.setState(4000);
             result.setMessage("注册失败，请联系系统管理员");
         }
         return result;
