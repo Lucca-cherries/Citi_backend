@@ -26,14 +26,15 @@ public class StockSystemUserController extends BaseController {
      * @author: Li
      * @date: 2023/3/5
      */
-    @PostMapping("")
+    @PostMapping("/reg")
     public JsonResult<Void> register(@RequestBody StockSystemUser stockSystemUser) {
         JsonResult<Void> result = new JsonResult<>();
         try {
+            System.err.println("新用户注册");
             // 调用业务对象执行注册
             stockSystemUserService.register(stockSystemUser);
             // 响应成功
-            result.setState(200);
+            result.setState(OK);
         } catch (UsernameDuplicateException e) {
             // 用户名被占用
             result.setState(4000);
@@ -55,7 +56,7 @@ public class StockSystemUserController extends BaseController {
     @GetMapping ("/login")
     public JsonResult<String> login(@RequestParam("email") String email, @RequestParam("pwd") String pwd) {
         StockSystemUser data = stockSystemUserService.login(email, pwd);
-//        System.err.println("login:" + data);
+        System.err.println("用户登录");
         String token = JWTUtils.getToken(data); // 有id
 
         return new JsonResult<>(200, token);

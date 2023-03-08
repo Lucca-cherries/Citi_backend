@@ -17,10 +17,10 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         return new JWTInterceptor();
     }
 
-    @Override
-    protected void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(getJwtFilter()).addPathPatterns("/**");
-        super.addInterceptors(registry);
-    }
+//    @Override
+//    protected void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(getJwtFilter()).addPathPatterns("/**");
+//        super.addInterceptors(registry);
+//    }
 
 }

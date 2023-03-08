@@ -20,7 +20,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/api/favorites")
                 .addPathPatterns("/api/stocks")
                 //排除接口
-                .excludePathPatterns("/api/users")
+                .excludePathPatterns("/api/users/reg")
                 .excludePathPatterns("/api/users/login");
     }
 }
