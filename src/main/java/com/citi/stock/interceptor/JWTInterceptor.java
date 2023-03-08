@@ -40,7 +40,7 @@ public class JWTInterceptor implements HandlerInterceptor {
         }
         try {
             String username = JWT.decode(request.getHeader("token")).getClaim("username").asString();
-            System.err.println("User " + username + " is verifying the token: " + token);
+            System.err.println("User " + username + " is verifying the token");
             String pwd = stockSystemUserMapper.findByUserName(username).getStocksystemuserPassword();
             JWTUtils.verify(token, pwd);
         } catch (SignatureVerificationException e) {

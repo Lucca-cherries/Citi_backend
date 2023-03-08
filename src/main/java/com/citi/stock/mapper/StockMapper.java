@@ -4,6 +4,7 @@ import com.citi.stock.entity.Stock;
 import com.citi.stock.vo.StockLatestVO;
 import com.citi.stock.vo.StockVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -45,7 +46,10 @@ public interface StockMapper {
      * @param size 分类偏移量（一页有多少条数据）
      * @return 最新股票持久层数据list
      */
-    List<StockVO> selectStockVOByPage(Integer uid, Integer start, Integer size);
+    List<StockVO> selectStockVOByPage(
+            @Param("uid")Integer uid,
+            @Param("start")Integer start,
+            @Param("size")Integer size);
 
     /**
      * 从url中直接指定具体股票code，查找svg，isFavorite等资料

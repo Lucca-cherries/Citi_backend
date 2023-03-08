@@ -31,7 +31,7 @@ public class StockServiceImpl implements IStockService {
 
     @Override
     public List<StockVO> getStockVOByPage(Integer uid, Integer page, Integer size) {
-        return stockMapper.selectStockVOByPage(1, (page-1)*size, size);
+        return stockMapper.selectStockVOByPage(uid, (page-1)*size, size);
     }
 
     @Override

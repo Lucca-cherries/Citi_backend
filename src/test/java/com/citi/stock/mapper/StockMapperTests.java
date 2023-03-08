@@ -24,7 +24,7 @@ public class StockMapperTests {
 
     @Test
     public void selectStockVOByPage(){
-        System.err.println(stockMapper.selectStockVOByPage(2, 0, 5));
+        System.err.println(stockMapper.selectStockVOByPage(2, 1, 5));
     }
 
     @Test

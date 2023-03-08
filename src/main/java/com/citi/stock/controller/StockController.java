@@ -28,6 +28,7 @@ public class StockController extends BaseController {
             @RequestParam("page") Integer page,
             @RequestParam("size") Integer size){
         Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
+        System.err.println("Rendering dashboard for user " + uid);
 
         // 从数据库获取一部分静态信息
         Integer total = iStockService.getTotalNumOfStocks();
