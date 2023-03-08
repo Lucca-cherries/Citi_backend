@@ -19,6 +19,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 //                .addPathPatterns("/**")
                 //排除登录接口
                 .excludePathPatterns("/api/**")
+                .excludePathPatterns("/api/users")
                 .excludePathPatterns("/api/users/login");
     }
 }

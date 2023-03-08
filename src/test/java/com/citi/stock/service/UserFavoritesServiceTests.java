@@ -23,8 +23,8 @@ public class UserFavoritesServiceTests {
     @Test
     public void addOneFavorite(){
         UserFavoritesRelation relation = UserFavoritesRelation.builder()
-                .userfavoritesUserId(3)
-                .userfavoritesStockCode("TSLA").build();
+                .userfavoritesUserId(4)
+                .userfavoritesStockCode("MSFT").build();
         assert iUserFavoritesRelationService.addOneFavorite(relation).equals(1);
     }
 

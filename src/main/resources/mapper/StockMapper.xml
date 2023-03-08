@@ -17,12 +17,12 @@
         stock_update_date,stock_svg
     </sql>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from stock
-        where  stock_id = #{stockId,jdbcType=INTEGER} 
-    </select>
+<!--    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">-->
+<!--        select-->
+<!--        <include refid="Base_Column_List" />-->
+<!--        from stock-->
+<!--        where  stock_id = #{stockId,jdbcType=INTEGER} -->
+<!--    </select>-->
     <select id="selectByPage" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />

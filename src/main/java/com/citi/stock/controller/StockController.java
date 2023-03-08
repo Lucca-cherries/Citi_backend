@@ -23,11 +23,14 @@ public class StockController {
 
     @GetMapping("")
     public StockLatestVOWithTotal showDashboard(
+            HttpServletRequest request,
             @RequestParam("page") Integer page,
             @RequestParam("size") Integer size){
+        Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
+
         // 从数据库获取一部分静态信息
         Integer total = iStockService.getTotalNumOfStocks();
-        List<StockVO> stockVOList = iStockService.getStockVOByPage(1, page, size);
+        List<StockVO> stockVOList = iStockService.getStockVOByPage(uid, page, size);
 
         // 从stockVOList中获取code列表
         List<String> stockCodes = new ArrayList<>();
