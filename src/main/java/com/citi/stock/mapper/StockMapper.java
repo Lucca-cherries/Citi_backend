@@ -14,7 +14,7 @@ import java.util.List;
 * @createDate 2023-03-06 09:50:22
 * @Entity com.citi.stock.entity.Stock
 */
-
+//@Repository
 public interface StockMapper {
 
     /**
