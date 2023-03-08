@@ -1,9 +1,9 @@
-#
-#spring:
-#  application:
-#    name: hw_springboot
-#  profiles:
-#    active: dev
+
+spring:
+  application:
+    name: hw_springboot
+  profiles:
+    active: dev
 #
 #  mvc:
 #    pathmatch:
