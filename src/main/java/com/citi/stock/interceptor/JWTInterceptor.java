@@ -23,6 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author admin
+ * 拦截器，请求到达controller之前会先执行preHandler
+ * 可能会出现mapper无法实例化的问题，因为拦截器在springboot项目创建之前实例化
+ * 详见两个配置类
  */
 @Slf4j
 public class JWTInterceptor implements HandlerInterceptor {

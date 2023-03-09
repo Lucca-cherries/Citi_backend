@@ -2,6 +2,10 @@ package com.citi.stock.util;
 
 import java.io.Serializable;
 
+/**
+ * 控制层返回消息接口类
+ * @param <E> data字段
+ */
 public class JsonResult<E> implements Serializable {
     /** 状态码 */
     private Integer state;

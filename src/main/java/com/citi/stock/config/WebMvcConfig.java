@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 /**
- * 很重要
+ * 很重要，配合mybatis配置类一起食用
  */
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurationSupport {

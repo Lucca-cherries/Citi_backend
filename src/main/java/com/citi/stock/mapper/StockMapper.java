@@ -31,13 +31,19 @@ public interface StockMapper {
      */
     Integer getTotalNum();
 
+    /**
+     * 条件查询总的股票记录条数
+     * @param stockName 查询股票名
+     * @param stockCode 查询股票symbol
+     * @return 满足模糊查询的记录条数
+     */
     Integer getTotalConditionNum(@Param("stockName")String stockName, @Param("stockCode")String stockCode);
 
     /**
      * 分页查询股票
      * @param start 起始页
      * @param offset 一页有多少条记录
-     * @return 分页擦汗寻结果
+     * @return 分页查询结果
      */
     List<Stock> selectByPage(Integer start, Integer offset);
 
@@ -61,6 +67,15 @@ public interface StockMapper {
      */
     StockVO selectStockVOByCode(Integer uid, String code);
 
+    /**
+     * 分页条件查询
+     * @param uid token用户id，用于收藏的判断
+     * @param start 起始记录下标
+     * @param size 一页记录数
+     * @param stockName 查询股票名
+     * @param stockCode 查询股票symbol
+     * @return 满足模糊查询条件的StockVO列表
+     */
     List<StockVO> conditionSelectStockVOByPage(
             @Param("uid")Integer uid,
             @Param("start")Integer start,

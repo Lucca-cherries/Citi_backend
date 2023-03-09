@@ -8,6 +8,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * 上传文件string类型转date类型的工具类
+ */
 public class StringToDate extends AbstractBeanField {
 
     @Override

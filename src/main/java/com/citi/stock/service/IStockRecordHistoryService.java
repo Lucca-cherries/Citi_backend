@@ -19,5 +19,10 @@ public interface IStockRecordHistoryService {
      */
     Integer addHistoryRecordsBatch(List<StockRecordHistory> historyList);
 
+    /**
+     * 从前端create页面插入一条股票历史记录到数据库
+     * @param stockRecordHistory 待插入的股票历史记录
+     * @return 影响的行数
+     */
     Integer insertOne(StockRecordHistory stockRecordHistory);
 }

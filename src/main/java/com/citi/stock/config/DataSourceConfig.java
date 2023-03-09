@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 
+/**
+ * 数据库配置类，必须添加，只在配置文件中写没用
+ */
 @Configuration
 public class DataSourceConfig {
     @Bean

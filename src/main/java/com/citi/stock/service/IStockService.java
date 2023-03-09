@@ -25,6 +25,15 @@ public interface IStockService {
      */
     List<StockVO> getStockVOByPage(Integer uid, Integer page, Integer size);
 
+    /**
+     * 模糊查询StockVO
+     * @param uid token用户id
+     * @param page 页码
+     * @param size 一页记录数
+     * @param stockName 带查询的股票名
+     * @param stockCode 带查询股票symbol
+     * @return StockVO列表
+     */
     List<StockVO> conditionGetStockVOByPage(Integer uid, Integer page, Integer size,
                                             String stockName, String stockCode);
 

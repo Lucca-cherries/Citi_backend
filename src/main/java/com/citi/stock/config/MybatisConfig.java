@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 /**
  * 很重要！ https://blog.csdn.net/baidu_28068985/article/details/106659825
  * 工程经验少了
+ * 和webmvc配置类一起看，解决mapper无法自动装配的问题
  */
 @Configuration
 @MapperScan(basePackages = "com.citi.stock.mapper", sqlSessionFactoryRef = "sqlSessionFactory")
