@@ -26,6 +26,11 @@
         select count(*)
         from stock
     </select>
+    <select id="getTotalConditionNum" resultType="java.lang.Integer">
+        select count(*)
+        from stock
+        where stock_code like "%"#{stockCode}"%" and stock_name like "%"#{stockName}"%"
+    </select>
 
 <!--    记录一个bug，收藏表中的symbol出现多次时这里搜到的结果symbol也会重复，应该是左连接的问题-->
 <!--    再记录一个bug，经常忘记#{user}导致参数个数不匹配-->

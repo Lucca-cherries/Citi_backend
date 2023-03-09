@@ -61,10 +61,10 @@ public class StockController extends BaseController {
             @RequestParam("stockCode")String stockCode){
         Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
         System.err.println("Rendering conditional query dashboard for user " + uid
-                + "with company=" + stockName + " and symbol=" + stockCode);
+                + " with company=" + stockName + " and symbol=" + stockCode);
 
         // 从数据库获取一部分静态信息
-        Integer total = iStockService.getTotalNumOfStocks();
+        Integer total = iStockService.getTotalConditionNum(stockName, stockCode);
         List<StockVO> stockVOList = iStockService.conditionGetStockVOByPage(uid, page, size, stockName, stockCode);
 
         // 从stockVOList中获取code列表

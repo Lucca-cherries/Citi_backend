@@ -46,6 +46,11 @@ public class StockServiceImpl implements IStockService {
     }
 
     @Override
+    public Integer getTotalConditionNum(String stockName, String stockCode) {
+        return stockMapper.getTotalConditionNum(stockName, stockCode);
+    }
+
+    @Override
     public List<Finnhub> getFinnhub(List<String> stockCodes) {
         List<Finnhub> finnhubList = new ArrayList<>();
         for(String stockCode: stockCodes){

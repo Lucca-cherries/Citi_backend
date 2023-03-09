@@ -34,6 +34,8 @@ public interface IStockService {
      */
     Integer getTotalNumOfStocks();
 
+    Integer getTotalConditionNum(String stockName, String stockCode);
+
     /**
      * 根据symbol获得Finnhub上的实时数据接口，用于展示在前端表单中
      * @param stockCodes 股票symbol列表

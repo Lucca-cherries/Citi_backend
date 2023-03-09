@@ -34,6 +34,11 @@ public class StockServiceTests {
     }
 
     @Test
+    public void getTotalConditionNum(){
+        System.err.println(iStockService.getTotalConditionNum("", "a"));
+    }
+
+    @Test
     public void getStockLatestVO(){
         List<String> stockCodes = new ArrayList<>();
         stockCodes.add("AAPL");

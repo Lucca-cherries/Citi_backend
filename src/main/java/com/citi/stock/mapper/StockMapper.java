@@ -31,6 +31,8 @@ public interface StockMapper {
      */
     Integer getTotalNum();
 
+    Integer getTotalConditionNum(@Param("stockName")String stockName, @Param("stockCode")String stockCode);
+
     /**
      * 分页查询股票
      * @param start 起始页

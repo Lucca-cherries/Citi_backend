@@ -37,4 +37,9 @@ public class StockMapperTests {
         System.err.println(
                 stockMapper.conditionSelectStockVOByPage(1, 0, 5, "", "a"));
     }
+
+    @Test
+    public void getTotalConditionNum(){
+        System.err.println(stockMapper.getTotalConditionNum("", "a"));
+    }
 }

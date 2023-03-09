@@ -29,6 +29,7 @@ public class StockRecordHistoryController extends BaseController {
     @GetMapping("/{stockCode}")
     public List<StockRecordHistory> getHistoryOfAStock(
             @PathVariable("stockCode") String stockCode){
+        System.err.println("Getting history of" + stockCode);
         List<StockRecordHistory> historyList =
                 iStockRecordHistoryService.getHistotyOfAStock(stockCode);
         return historyList;
