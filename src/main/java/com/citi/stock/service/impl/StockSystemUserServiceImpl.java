@@ -26,7 +26,7 @@ public class StockSystemUserServiceImpl implements IStockSystemUserService{
         String name = stockSystemUser.getStocksystemuserName();
         StockSystemUser result = stockSystemUserMapper.findByUserName(name);
         if(result!=null){
-            throw new UsernameDuplicateException("用户名"+name+"已被占用");
+            throw new UsernameDuplicateException("邮箱"+name+"已被占用");
         }
         int rows =stockSystemUserMapper.insert(stockSystemUser);
         if(rows!=1){

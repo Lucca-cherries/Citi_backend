@@ -33,7 +33,7 @@ public class JWTInterceptor implements HandlerInterceptor {
     @Override
     // 如果接口被拦截，控制层接受请求之前会执行这个函数
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-            throws JwtException {
+            throws JwtException, TokenExpiredException {
         String token = request.getHeader("token");
         if (StringUtils.isEmpty(token)) {
             throw new JwtException("interceptor: token不能为空");
@@ -45,9 +45,6 @@ public class JWTInterceptor implements HandlerInterceptor {
             JWTUtils.verify(token, pwd);
         } catch (SignatureVerificationException e) {
             log.error("无效签名！ 错误 ->", e);
-            throw new JwtException();
-        } catch (TokenExpiredException e) {
-            log.error("token过期！ 错误 ->", e);
             throw new JwtException();
         } catch (AlgorithmMismatchException e) {
             log.error("token算法不一致！ 错误 ->", e);
