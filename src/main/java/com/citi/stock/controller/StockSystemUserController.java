@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Email;
 
 
 @RestController
@@ -55,7 +56,8 @@ public class StockSystemUserController extends BaseController {
      * @return 返回token和HTTP状态
      */
     @GetMapping ("/login")
-    public JsonResult<String> login(@RequestParam("email") String email, @RequestParam("pwd") String pwd) {
+    public JsonResult<String> login(@Email(message = "请输入正确的邮箱格式") @RequestParam("email") String email,
+                                    @RequestParam("pwd") String pwd) {
         StockSystemUser data = stockSystemUserService.login(email, pwd);
         System.err.println("用户" + email + "登录");
         String token = JWTUtils.getToken(data); // 有id

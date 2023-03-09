@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
+
 /**
  * @TableName stock_system_user
  */
@@ -15,6 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StockSystemUser implements Serializable {
+    @Email(message = "请填写正确的邮箱地址")
     private Integer stocksystemuserId;
 
     private String stocksystemuserName;
