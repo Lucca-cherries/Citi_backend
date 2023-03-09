@@ -15,7 +15,7 @@ public class DataSourceConfig {
     public DataSource getDataSource() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://10.0.0.12:3306/citi?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai")
+                .url("jdbc:mysql://43.136.170.29:3306/citi?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai")
                 .username("root")
                 .password("GroupD&Citi")
                 .build();
