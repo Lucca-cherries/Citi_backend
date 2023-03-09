@@ -34,6 +34,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 .excludePathPatterns("/api/stocks")
                 .excludePathPatterns("/api/users/reg")
                 .excludePathPatterns("/api/users/login");
+
+        super.addInterceptors(registry);
     }
 
 }
