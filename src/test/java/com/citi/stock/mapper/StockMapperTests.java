@@ -31,4 +31,10 @@ public class StockMapperTests {
     public void selectStockVOByCode(){
         System.err.println(stockMapper.selectStockVOByCode(1, "AAPL"));
     }
+
+    @Test
+    public void conditionSelectStockVOByPage(){
+        System.err.println(
+                stockMapper.conditionSelectStockVOByPage(1, 0, 5, "", "a"));
+    }
 }

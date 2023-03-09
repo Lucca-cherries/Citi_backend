@@ -59,5 +59,10 @@ public interface StockMapper {
      */
     StockVO selectStockVOByCode(Integer uid, String code);
 
-//    List<StockVO> selectStockB
+    List<StockVO> conditionSelectStockVOByPage(
+            @Param("uid")Integer uid,
+            @Param("start")Integer start,
+            @Param("size")Integer size,
+            @Param("stockName")String stockName,
+            @Param("stockCode")String stockCode);
 }

@@ -51,4 +51,9 @@ public class StockServiceTests {
     public void getStockLatestVOofOne(){
         System.err.println(iStockService.getStockLatestVOofOne(1, "AAPL"));
     }
+
+    @Test
+    public void conditionGetStockVOByPage(){
+        System.err.println(iStockService.conditionGetStockVOByPage(1, 1, 5, "", "a"));
+    }
 }

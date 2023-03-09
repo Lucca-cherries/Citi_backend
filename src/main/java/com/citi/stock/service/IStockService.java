@@ -25,6 +25,9 @@ public interface IStockService {
      */
     List<StockVO> getStockVOByPage(Integer uid, Integer page, Integer size);
 
+    List<StockVO> conditionGetStockVOByPage(Integer uid, Integer page, Integer size,
+                                            String stockName, String stockCode);
+
     /**
      * 获得所有股票的个数
      * @return 所有股票的个数
