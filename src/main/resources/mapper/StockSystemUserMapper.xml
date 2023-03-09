@@ -20,6 +20,7 @@
         *
         from stock_system_user
         where  stocksystemuser_name = #{stocksystemuserName,jdbcType=VARCHAR}
+        limit 1
     </select>
 
 

@@ -44,6 +44,7 @@
         from stock left join user_favorites_relation
         on stock_code = userfavorites_stock_code
         where stock_code = #{code}
+        limit 1
     </select>
 
     <insert id="insert" keyColumn="stock_id" keyProperty="stockId" parameterType="com.citi.stock.entity.Stock" useGeneratedKeys="true">
