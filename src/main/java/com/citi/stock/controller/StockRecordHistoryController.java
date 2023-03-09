@@ -7,6 +7,7 @@ import com.citi.stock.service.IStockRecordHistoryService;
 import com.citi.stock.util.JsonResult;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+import io.swagger.v3.core.util.Json;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,8 @@ public class StockRecordHistoryController extends BaseController {
 
     @PostMapping("/upload")
     // upload拼错了会报Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
-    public String uploadCSVFile(@RequestParam("file") MultipartFile file) {
+    public JsonResult<Void> uploadCSVFile(@RequestParam("file") MultipartFile file) {
+        System.err.println("Uploading file...");
         // register converter from String to Date
         DateConverter converter = new DateConverter();
         converter.setPattern("yyyy-MM-dd");
@@ -69,7 +71,7 @@ public class StockRecordHistoryController extends BaseController {
             }
         }
 
-        return "file-uploaded";
+        return new JsonResult<>(OK);
     }
 
     @PostMapping
