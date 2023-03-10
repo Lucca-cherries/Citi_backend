@@ -6,6 +6,7 @@ import com.citi.stock.service.IUserFavoritesRelationService;
 import com.citi.stock.util.JsonResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @RequestMapping("/api/favorites")
 @RestController
 @Tag(name = "用户收藏管理接口", description = "用户收藏")
+@Slf4j
 //@CrossOrigin
 public class UserFavoritesController extends BaseController {
     @Autowired
@@ -26,6 +28,7 @@ public class UserFavoritesController extends BaseController {
         // 从token中拿到用户id
         String token = request.getHeader("token");
         Integer uid = JWT.decode(token).getClaim("userId").asInt();
+        log.info("Getting all favorites for user {}", uid);
 
         // 根据uid查找收藏列表
         return iUserFavoritesRelationService.getFavoritesByUid(uid);
@@ -36,6 +39,7 @@ public class UserFavoritesController extends BaseController {
     public JsonResult<Void> addOneFavorite(HttpServletRequest request,
                                      @PathVariable("stockCode") String stockCode){
         Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
+        log.debug("User {} favorite {}",uid, stockCode);
 
         iUserFavoritesRelationService.addOneFavorite(
                 UserFavoritesRelation.builder()
@@ -50,6 +54,7 @@ public class UserFavoritesController extends BaseController {
     public JsonResult<Void> cancelFavorite(HttpServletRequest request,
                                            @PathVariable("stockCode") String stockCode){
         Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
+        log.debug("User {} un-favorite {}",uid, stockCode);
 
         iUserFavoritesRelationService.deleteByUidAndCode(
                 UserFavoritesRelation.builder()

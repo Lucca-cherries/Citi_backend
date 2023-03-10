@@ -7,6 +7,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.citi.stock.entity.StockSystemUser;
 import com.citi.stock.interceptor.ex.JwtException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Calendar;
@@ -14,6 +15,7 @@ import java.util.Calendar;
 /**
  * @author admin
  */
+@Slf4j
 public class JWTUtils {
 
     /**
@@ -27,7 +29,7 @@ public class JWTUtils {
         instance.add(Calendar.DATE, 1);
 
         JWTCreator.Builder builder = JWT.create();
-//        System.err.println("encode: " + u.getStocksystemuserId());
+        log.debug("JWTUtils: Encode {}", u.getStocksystemuserName());
         builder.withClaim("userId", u.getStocksystemuserId())
                 .withClaim("username", u.getStocksystemuserName());
 
@@ -40,7 +42,8 @@ public class JWTUtils {
      */
     public static DecodedJWT verify(String token, String password) throws JwtException {
         if(StringUtils.isEmpty(token)){
-            throw new JwtException("utils: token不能为空");
+            log.error("JWTUtils: Empty token");
+            throw new JwtException("utils: token empty.");
         }
 
         //登录用户真正的密码

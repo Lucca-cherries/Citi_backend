@@ -10,6 +10,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import java.util.List;
 @RestController
 @Tag(name = "股票历史数据管理接口", description = "股票历史数据的展示、上传和下载")
 //@CrossOrigin
+@Slf4j
 public class StockRecordHistoryController extends BaseController {
     @Autowired
     private IStockRecordHistoryService iStockRecordHistoryService;
@@ -35,16 +37,15 @@ public class StockRecordHistoryController extends BaseController {
     public List<StockRecordHistory> getHistoryOfAStock(
             @PathVariable("stockCode") String stockCode){
         System.err.println("Getting history of" + stockCode);
-        List<StockRecordHistory> historyList =
-                iStockRecordHistoryService.getHistotyOfAStock(stockCode);
-        return historyList;
+        log.info("Getting history of {} from database", stockCode);
+        return iStockRecordHistoryService.getHistotyOfAStock(stockCode);
     }
 
     @Operation(summary = "上传股票历史数据")
     @PostMapping("/upload")
     // upload拼错了会报Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
     public JsonResult<Void> uploadCSVFile(@RequestParam("file") MultipartFile file) {
-        System.err.println("Uploading file...");
+        log.info("Uploading file from frontend...");
         // register converter from String to Date
         DateConverter converter = new DateConverter();
         converter.setPattern("yyyy-MM-dd");
@@ -52,9 +53,9 @@ public class StockRecordHistoryController extends BaseController {
 
         // validate file
         if (file.isEmpty()) {
-            throw new FileEmptyException("上传文件为空");
+            log.error("File uploaded is empty.");
+            throw new FileEmptyException("File Empty.");
         } else {
-
             // parse CSV file to create a list of `User` objects
             try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
 
@@ -63,19 +64,20 @@ public class StockRecordHistoryController extends BaseController {
                         .withType(StockRecordHistory.class)
                         .withIgnoreLeadingWhiteSpace(true)
                         .build();
+                log.debug("Create csv to bean reader.");
 
                 // convert `CsvToBean` object to list of StockRecordHistory
                 List<StockRecordHistory> historyList = csvToBean.parse();
+                log.debug("Converting csv to list of StockRecordHistory: {}", historyList);
 
                 // TODO: save in DB?
                 iStockRecordHistoryService.addHistoryRecordsBatch(historyList);
 
             } catch (Exception ex) {
-                System.err.println("文件上传异常");
-                throw new FileUploadException("文件上传异常");
+                log.error("File uploading error.");
+                throw new FileUploadException("File Uploading Error.");
             }
         }
-
         return new JsonResult<>(OK);
     }
 
@@ -83,6 +85,7 @@ public class StockRecordHistoryController extends BaseController {
     @PostMapping
     public JsonResult<Void> addOneHistoryRecord(@RequestBody StockRecordHistory stockRecordHistory){
         System.err.println("add" + stockRecordHistory);
+        log.info("Create history record into database: {}", stockRecordHistory);
         iStockRecordHistoryService.insertOne(stockRecordHistory);
         return new JsonResult<>(OK);
     }

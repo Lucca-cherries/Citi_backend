@@ -9,6 +9,7 @@ import com.citi.stock.util.JWTUtils;
 import com.citi.stock.util.JsonResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ import javax.validation.constraints.Email;
 @Validated
 @Tag(name = "系统用户管理接口", description = "系统用户管理")
 //@CrossOrigin
+@Slf4j
 public class StockSystemUserController extends BaseController {
     @Autowired
     private IStockSystemUserService stockSystemUserService;
@@ -39,17 +41,19 @@ public class StockSystemUserController extends BaseController {
     public JsonResult<Void> register(@Validated @RequestBody StockSystemUser stockSystemUser) {
         JsonResult<Void> result = new JsonResult<>();
         try {
-            System.err.println("新用户请求注册：" + stockSystemUser.getStocksystemuserName());
+            log.info("New user register: {}", stockSystemUser.getStocksystemuserName());
             // 调用业务对象执行注册
             stockSystemUserService.register(stockSystemUser);
             // 响应成功
             result.setState(OK);
         } catch (UsernameDuplicateException e) {
             // 用户名被占用
+            log.error("Username duplicated.");
             result.setState(4000);
             result.setMessage("User already exists.");
         } catch (InsertException e) {
             // 插入数据异常
+            log.error("Error with database in insertion.");
             result.setState(4000);
             result.setMessage("Database insertation failed. Please contact Admin.");
         }
@@ -66,7 +70,7 @@ public class StockSystemUserController extends BaseController {
     public JsonResult<String> login(@Valid @Email(message = "请输入正确的邮箱格式") @RequestParam("email") String email,
                                     @RequestParam("pwd") String pwd) {
         StockSystemUser data = stockSystemUserService.login(email, pwd);
-        System.err.println("用户" + email + "请求登录");
+        log.info("User {} try to log in.", email);
         String token = JWTUtils.getToken(data); // 有id
 
         return new JsonResult<>(OK, token);
@@ -80,28 +84,33 @@ public class StockSystemUserController extends BaseController {
      * @author: Li
      * @date: 2023/3/6
      */
-    @Operation(summary = "注销用户")
-    @DeleteMapping("/{username}")
-    @ResponseBody
-    public JsonResult<Void> deleteUser(HttpServletRequest request, @PathVariable("username") String username) {
-        System.err.println("用户注销");
-        Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
+//    @Operation(summary = "注销用户")
+//    @DeleteMapping("/{username}")
+//    @ResponseBody
+//    public JsonResult<Void> deleteUser(HttpServletRequest request, @PathVariable("username") String username) {
+//        System.err.println("用户注销");
+//        Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
+//
+//        JsonResult<Void> result = new JsonResult<>();
+//        stockSystemUserService.deleteUser(uid, username);
+//        result.setState(OK);
+//        return result;
+//    }
 
-        JsonResult<Void> result = new JsonResult<>();
-        stockSystemUserService.deleteUser(uid, username);
-        result.setState(OK);
-        return result;
-    }
 
-
-
+    /**
+     * 用户更改密码
+     * @param oldPwd 原密码
+     * @param newPwd 新密码
+     * @param email 用户邮箱
+     * @return 修改状态
+     */
     @PutMapping("/change-pwd")
     @ResponseBody
     public JsonResult<Void> changePwd(@RequestParam("oldPwd")String oldPwd,@RequestParam("newPwd")String newPwd,@RequestParam("email")String email){
-        JsonResult<Void> result = new JsonResult<>();
+        log.info("User {} try to change password.", email);
         stockSystemUserService.changePwd(email,oldPwd,newPwd);
-        result.setState(OK);
-        return result;
+        return new JsonResult<>(OK);
     }
 
 }

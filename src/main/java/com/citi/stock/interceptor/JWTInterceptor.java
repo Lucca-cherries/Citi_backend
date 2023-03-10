@@ -39,22 +39,23 @@ public class JWTInterceptor implements HandlerInterceptor {
             throws JwtException, TokenExpiredException {
         String token = request.getHeader("token");
         if (StringUtils.isEmpty(token)) {
-            throw new JwtException("interceptor: token不能为空");
+            log.error("Token is empty in interceptor.");
+            throw new JwtException("interceptor: Token can not be empty.");
         }
         try {
             String username = JWT.decode(request.getHeader("token")).getClaim("username").asString();
-            System.err.println("User " + username + " is verifying the token");
+            log.info("User {} is verifying the token.", username);
             String pwd = stockSystemUserMapper.findByUserName(username).getStocksystemuserPassword();
             JWTUtils.verify(token, pwd);
         } catch (SignatureVerificationException e) {
             log.error("无效签名！ 错误 ->", e);
-            throw new JwtException();
+            throw new JwtException("Invalid token.");
         } catch (AlgorithmMismatchException e) {
             log.error("token算法不一致！ 错误 ->", e);
-            throw new JwtException();
+            throw new JwtException("Token algorithm inconsistent.");
         } catch (Exception e) {
             log.error("token无效！ 错误 ->", e);
-            throw new JwtException();
+            throw new JwtException("Token invalid.");
         }
         return true;
     }
