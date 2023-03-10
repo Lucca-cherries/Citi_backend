@@ -24,8 +24,8 @@ public class StringToDate extends AbstractBeanField {
         try {
             date = format.parse(s);
         } catch (ParseException e) {
+            log.error("Parse date error.");
             e.printStackTrace();
-            System.out.println("解析错误");
         }
         return date;
     }
