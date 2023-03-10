@@ -17,8 +17,8 @@ public class StockSystemUserMapperTests {
 
     @Test
     public void findByUserName(){
-        System.err.println(stockSystemUserMapper.findByUserName("u03"));
-        assert stockSystemUserMapper.findByUserName("u03").getStocksystemuserPassword().equals("333");
+        System.err.println(stockSystemUserMapper.findByUserName("u01"));
+        assert stockSystemUserMapper.findByUserName("u01").getStocksystemuserPassword().equals("111");
     }
 
     @Test

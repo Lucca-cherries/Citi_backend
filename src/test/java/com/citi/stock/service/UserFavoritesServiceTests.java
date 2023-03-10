@@ -36,8 +36,8 @@ public class UserFavoritesServiceTests {
     @Test
     public void deleteByUidAndCode(){
         UserFavoritesRelation relation = UserFavoritesRelation.builder()
-                .userfavoritesUserId(1)
-                .userfavoritesStockCode("AAPL").build();
+                .userfavoritesUserId(4)
+                .userfavoritesStockCode("MSFT").build();
         assert iUserFavoritesRelationService.deleteByUidAndCode(relation) == 1;
     }
 }

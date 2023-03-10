@@ -31,7 +31,7 @@ public class StockRecordHistoryServiceTests {
 //        historyList.add(new StockRecordHistory("service"));
 //        historyList.add(new StockRecordHistory("service"));
 //        historyList.add(new StockRecordHistory("service"));
-//        historyList.add((new StockRecordHistory(null, "Test", null, null, null, null, null, null )));
+        historyList.add((new StockRecordHistory(null, "Test", null, null, null, null, null, null )));
 
         System.err.println(iStockRecordHistoryService.addHistoryRecordsBatch(historyList));
     }
