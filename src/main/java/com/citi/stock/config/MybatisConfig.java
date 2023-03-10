@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -29,5 +30,15 @@ public class MybatisConfig {
         factoryBean.setTypeAliasesPackage("com.citi.stock.entity");
         factoryBean.setDataSource(dataSource);
         return factoryBean.getObject();
+    }
+
+    @Bean
+    public DataSource getDataSource() {
+        return DataSourceBuilder.create()
+                .driverClassName("com.mysql.cj.jdbc.Driver")
+                .url("jdbc:mysql://43.136.170.29:3306/citi?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai")
+                .username("root")
+                .password("GroupD&Citi")
+                .build();
     }
 }
