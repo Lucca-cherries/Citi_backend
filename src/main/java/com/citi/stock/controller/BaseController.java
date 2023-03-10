@@ -8,46 +8,61 @@ import com.citi.stock.interceptor.ex.JwtException;
 import com.citi.stock.service.ex.*;
 import com.citi.stock.util.JsonResult;
 import org.apache.tomcat.util.http.fileupload.impl.FileUploadIOException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.validation.ConstraintViolationException;
 
 
 /** 控制层类的基类 */
+@RestControllerAdvice
 public class BaseController {
     // 操作成功的状态码
     public static final int OK = 200;
 
     // @ExceptionHandler用于统一处理方法抛出的异常
-    @ExceptionHandler({ServiceException.class, FileUploadException.class, JwtException.class})
+    @ExceptionHandler({ServiceException.class,
+            FileUploadException.class,
+            JwtException.class,
+            MethodArgumentNotValidException.class,
+            ConstraintViolationException.class})
     public JsonResult<Void> handleException(Throwable e)
     {
         JsonResult<Void> result = new JsonResult<>(e);
         if (e instanceof FileEmptyException) {
             result.setState(6000);
-            result.setMessage("上传数据为空");
+            result.setMessage("Data Uploaded are Empty.");
         } else if (e instanceof FileUploadIOException) {
             result.setState(6004);
-            result.setMessage("上传文件异常");
+            result.setMessage("File Uploaded Error.");
         } else if (e instanceof JwtException) {
             result.setState(7000);
-            result.setMessage("用户token验证异常");
+            result.setMessage("User Token Validation Failed.");
         } else if (e instanceof TokenExpiredException) {
             result.setState(7000);
-            result.setMessage("token失效，请重新登录");
+            result.setMessage("Token Expired. Please Sign In Again.");
         } else if (e instanceof PasswordNotMatchException) {
             result.setState(5000);
-            result.setMessage("密码错误");
+            result.setMessage("Wrong Password");
         } else if (e instanceof UserNotFoundException) {
             result.setState(5000);
-            result.setMessage("邮箱用户不存在");
+            result.setMessage("Email User Does Not Exist.");
         } else if (e instanceof UsernameDuplicateException) {
             result.setState(5000);
-            result.setMessage("邮箱用户已存在，请输入密码登录");
+            result.setMessage("Email User Already Exists. Please Sign In.");
+        } else if (e instanceof MethodArgumentNotValidException) {
+            result.setState(5000);
+            result.setMessage("Wrong Email Format.");
+        } else if (e instanceof ConstraintViolationException) {
+            result.setState(5000);
+            result.setMessage("Wrong Email Format.");
         } else if (e instanceof InsertException) {
             result.setState(4000);
-            result.setMessage("数据库插入故障，请联系管理员");
+            result.setMessage("Database Insertion Error. Please Contact Admin.");
         } else if (e instanceof UpdateException) {
             result.setState(4000);
-            result.setMessage("数据库信息更新故障，请联系管理员");
+            result.setMessage("Database Insertion Error. Please Contact Admin.");
         }
         return result;
     }

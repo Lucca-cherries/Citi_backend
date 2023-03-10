@@ -17,9 +17,10 @@ import javax.validation.constraints.Email;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StockSystemUser implements Serializable {
-    @Email(message = "请填写正确的邮箱地址")
+
     private Integer stocksystemuserId;
 
+    @Email(message = "请填写正确的邮箱地址")
     private String stocksystemuserName;
 
     private String stocksystemuserPassword;

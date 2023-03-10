@@ -8,14 +8,18 @@ import com.citi.stock.service.ex.UsernameDuplicateException;
 import com.citi.stock.util.JWTUtils;
 import com.citi.stock.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 
 
 @RestController
 @RequestMapping("/api/users")
+@Validated
+
 //@CrossOrigin
 public class StockSystemUserController extends BaseController {
     @Autowired
@@ -29,10 +33,10 @@ public class StockSystemUserController extends BaseController {
      * @date: 2023/3/5
      */
     @PostMapping("/reg")
-    public JsonResult<Void> register(@RequestBody StockSystemUser stockSystemUser) {
+    public JsonResult<Void> register(@Validated @RequestBody StockSystemUser stockSystemUser) {
         JsonResult<Void> result = new JsonResult<>();
         try {
-            System.err.println("新用户注册：" + stockSystemUser.getStocksystemuserName());
+            System.err.println("新用户请求注册：" + stockSystemUser.getStocksystemuserName());
             // 调用业务对象执行注册
             stockSystemUserService.register(stockSystemUser);
             // 响应成功
@@ -56,10 +60,10 @@ public class StockSystemUserController extends BaseController {
      * @return 返回token和HTTP状态
      */
     @GetMapping ("/login")
-    public JsonResult<String> login(@Email(message = "请输入正确的邮箱格式") @RequestParam("email") String email,
+    public JsonResult<String> login(@Valid @Email(message = "请输入正确的邮箱格式") @RequestParam("email") String email,
                                     @RequestParam("pwd") String pwd) {
         StockSystemUser data = stockSystemUserService.login(email, pwd);
-        System.err.println("用户" + email + "登录");
+        System.err.println("用户" + email + "请求登录");
         String token = JWTUtils.getToken(data); // 有id
 
         return new JsonResult<>(OK, token);

@@ -31,6 +31,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 //                .addPathPatterns("/api/favorites")
 //                .addPathPatterns("/api/stocks")
                 //排除接口
+                .excludePathPatterns("/**")
                 .excludePathPatterns("/api/stocks")
                 .excludePathPatterns("/api/users/reg")
                 .excludePathPatterns("/api/users/login");
