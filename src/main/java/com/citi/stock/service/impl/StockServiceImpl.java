@@ -1,10 +1,13 @@
 package com.citi.stock.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.citi.stock.entity.Stock;
 import com.citi.stock.mapper.StockMapper;
 import com.citi.stock.service.IStockService;
 import com.citi.stock.util.Finnhub;
+import com.citi.stock.util.Timestamp;
 import com.citi.stock.vo.StockLatestVO;
 import com.citi.stock.vo.StockVO;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -58,7 +61,17 @@ public class StockServiceImpl implements IStockService {
                     stockCode + "&token=cg21dgpr01qibiilj8h0cg21dgpr01qibiilj8hg";
             String res = restTemplate.getForObject(url, String.class);
 
-            Finnhub stockFinnhub = JSON.parseObject(res, Finnhub.class);
+            Finnhub stockFinnhub = JSON.parseObject(res, Finnhub.class); // 其中date还是时间戳
+            stockFinnhub.setDate(Timestamp.timeStamp2Date(stockFinnhub.getDate(), null));
+
+            // 从iex上获取volume
+            String volumeUrl = "https://api.iex.cloud/v1/data/CORE/QUOTE/" +
+                    stockCode + "?token=sk_454461c9456640bc93c1f53513938073";
+            String volumeRes = restTemplate.getForObject(volumeUrl, String.class);
+            JSONArray jobj = JSON.parseObject(volumeRes, JSONArray.class);//封装成一个JSON对象
+            Integer volume = ((JSONObject) jobj.get(0)).getInteger("avgTotalVolume");
+            stockFinnhub.setVolume(volume);
+
             finnhubList.add(stockFinnhub);
         }
         return finnhubList;
