@@ -78,4 +78,22 @@ public class StockSystemUserServiceImpl implements IStockSystemUserService{
             throw new UpdateException("权限不足");
         }
     }
+
+    @Override
+    public void changePwd(String email, String oldPwd,String newPwd) {
+        StockSystemUser stockSystemUser = stockSystemUserMapper.findByUserName(email);
+        if (stockSystemUser==null) {
+            throw new UserNotFoundException("用户不存在");
+        }
+        if ((stockSystemUser.getStocksystemuserPassword()).equals(oldPwd)) {
+            stockSystemUser.setStocksystemuserPassword(newPwd);
+            int rows = stockSystemUserMapper.updateByPrimaryKey(stockSystemUser);
+            if (rows != 1) {
+                throw new UpdateException("修改密码失败，请联系系统管理员");
+            }
+        } else {
+            throw new PasswordNotMatchException("密码输入错误，请重试");
+        }
+
+    }
 }

@@ -36,6 +36,11 @@
         values (#{stocksystemuserId,jdbcType=INTEGER},#{stocksystemuserName,jdbcType=VARCHAR},#{stocksystemuserPassword,jdbcType=VARCHAR}
         )
     </insert>
-
+    <update id="updateByPrimaryKey" parameterType="com.citi.stock.entity.StockSystemUser">
+        update stock_system_user
+        set
+            stocksystemuser_password =  #{stocksystemuserPassword,jdbcType=VARCHAR}
+        where   stocksystemuser_id = #{stocksystemuserId,jdbcType=INTEGER}
+    </update>
 
 </mapper>

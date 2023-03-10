@@ -1,5 +1,6 @@
 package com.citi.stock.mapper;
 
+import com.citi.stock.entity.StockSystemUser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,5 +24,15 @@ public class StockSystemUserMapperTests {
     @Test
     public void deleteByUsername(){
         System.err.println(stockSystemUserMapper.deleteByUsername("jgq"));
+    }
+
+    @Test
+    public void change(){
+        StockSystemUser stockSystemUser= StockSystemUser.builder()
+                .stocksystemuserName("u03@qq.com")
+                .stocksystemuserPassword("222")
+                .stocksystemuserId(5)
+                .build();
+        System.err.println(stockSystemUserMapper.updateByPrimaryKey(stockSystemUser));
     }
 }

@@ -21,9 +21,9 @@ public class StockSystemUserServiceTests {
         try {
 
             StockSystemUser stockSystemUser= StockSystemUser.builder()
-                            .stocksystemuserName("u01")
-                            .stocksystemuserPassword("111")
-                            .build();
+                    .stocksystemuserName("u01")
+                    .stocksystemuserPassword("111")
+                    .build();
 
 
             stockSystemUserService.register(stockSystemUser);
@@ -64,6 +64,17 @@ public class StockSystemUserServiceTests {
             System.out.println(e.getMessage());
         }
     }
+    @Test
+    public void changePwd(){
+        try {
 
 
+            stockSystemUserService.changePwd("u03@qq.com","333","222");
+
+            System.out.println("密码修改成功！");
+        } catch (ServiceException e) {
+            System.out.println("密码修改失败！" + e.getClass().getSimpleName());
+            System.out.println(e.getMessage());
+        }
+    }
 }

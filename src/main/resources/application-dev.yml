@@ -11,9 +11,9 @@ spring:
   # 太蠢了，数据库url复制过来没有修改表名，看了一上午!
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://43.136.170.29:3306/citi?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/citi_fintech?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
-    password: GroupD&Citi
+    password: 123456
 
   jackson:
     default-property-inclusion: non_null

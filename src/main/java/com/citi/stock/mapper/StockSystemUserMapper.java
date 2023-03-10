@@ -33,4 +33,12 @@ public interface StockSystemUserMapper {
      */
     StockSystemUser findByUserName(String username);
 
+
+    /**
+     * 更新密码
+     * @param record 用户信息
+     * @return 影响的行数
+     */
+    int updateByPrimaryKey(StockSystemUser record);
+
 }

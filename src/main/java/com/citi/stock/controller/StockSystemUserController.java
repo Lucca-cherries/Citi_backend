@@ -55,7 +55,6 @@ public class StockSystemUserController extends BaseController {
         }
         return result;
     }
-
     /**
      * 用户登录
      * @param email 用户邮箱
@@ -90,6 +89,17 @@ public class StockSystemUserController extends BaseController {
 
         JsonResult<Void> result = new JsonResult<>();
         stockSystemUserService.deleteUser(uid, username);
+        result.setState(OK);
+        return result;
+    }
+
+
+
+    @PutMapping("/change-pwd")
+    @ResponseBody
+    public JsonResult<Void> changePwd(@RequestParam("oldPwd")String oldPwd,@RequestParam("newPwd")String newPwd,@RequestParam("email")String email){
+        JsonResult<Void> result = new JsonResult<>();
+        stockSystemUserService.changePwd(email,oldPwd,newPwd);
         result.setState(OK);
         return result;
     }

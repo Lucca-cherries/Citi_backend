@@ -15,9 +15,9 @@ public class DataSourceConfig {
     public DataSource getDataSource() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://43.136.170.29:3306/citi?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai")
+                .url("jdbc:mysql://localhost:3306/citi_fintech?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai")
                 .username("root")
-                .password("GroupD&Citi")
+                .password("123456")
                 .build();
     }
 }

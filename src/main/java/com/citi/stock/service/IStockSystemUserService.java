@@ -31,5 +31,15 @@ public interface IStockSystemUserService {
      * @date: 2023/3/5
      */
     void deleteUser(Integer uid, String username);
+    /*
+     * @description
+     * @param uid
+     * @param newPwd
+     * @return void
+     * @author: Li
+     * @date: 2023/3/10
+     */
+    void changePwd(String email,String oldPwd,String newPwd);
+
 
 }

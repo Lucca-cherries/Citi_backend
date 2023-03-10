@@ -25,7 +25,7 @@ public class StockSystemUserContollerTest {
 
     @Test
     public void register() throws Exception {
-        ResultActions action = mm.perform(MockMvcRequestBuilders.post("/users/register?stocksystemuserName=u03&stocksystemuserPasword=333"));//通过MockMvc进行http请求测试
+        ResultActions action = mm.perform(MockMvcRequestBuilders.post("/users/register?stocksystemuserName=u03&stocksystemuserPassword=333"));//通过MockMvc进行http请求测试
         MvcResult resul = action.andReturn();//获取请求结果
         System.out.println(resul.getResponse().getContentAsString());//打印结果
     }
