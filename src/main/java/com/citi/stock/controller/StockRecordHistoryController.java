@@ -8,6 +8,8 @@ import com.citi.stock.util.JsonResult;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import io.swagger.v3.core.util.Json;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,13 @@ import java.util.List;
 
 @RequestMapping("/api/stockhistories")
 @RestController
+@Tag(name = "股票历史数据管理接口", description = "股票历史数据的展示、上传和下载")
 //@CrossOrigin
 public class StockRecordHistoryController extends BaseController {
     @Autowired
     private IStockRecordHistoryService iStockRecordHistoryService;
 
+    @Operation(summary = "通过symbol查询某一只股票的历史数据")
     @GetMapping("/{stockCode}")
     public List<StockRecordHistory> getHistoryOfAStock(
             @PathVariable("stockCode") String stockCode){
@@ -36,6 +40,7 @@ public class StockRecordHistoryController extends BaseController {
         return historyList;
     }
 
+    @Operation(summary = "上传股票历史数据")
     @PostMapping("/upload")
     // upload拼错了会报Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
     public JsonResult<Void> uploadCSVFile(@RequestParam("file") MultipartFile file) {
@@ -74,6 +79,7 @@ public class StockRecordHistoryController extends BaseController {
         return new JsonResult<>(OK);
     }
 
+    @Operation(summary = "从create面板创建一条股票历史记录并且插入数据库")
     @PostMapping
     public JsonResult<Void> addOneHistoryRecord(@RequestBody StockRecordHistory stockRecordHistory){
         System.err.println("add" + stockRecordHistory);

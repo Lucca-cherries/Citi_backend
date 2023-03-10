@@ -7,6 +7,8 @@ import com.citi.stock.service.ex.InsertException;
 import com.citi.stock.service.ex.UsernameDuplicateException;
 import com.citi.stock.util.JWTUtils;
 import com.citi.stock.util.JsonResult;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +21,7 @@ import javax.validation.constraints.Email;
 @RestController
 @RequestMapping("/api/users")
 @Validated
-
+@Tag(name = "系统用户管理接口", description = "系统用户管理")
 //@CrossOrigin
 public class StockSystemUserController extends BaseController {
     @Autowired
@@ -32,6 +34,7 @@ public class StockSystemUserController extends BaseController {
      * @author: Li
      * @date: 2023/3/5
      */
+    @Operation(summary = "注册用户")
     @PostMapping("/reg")
     public JsonResult<Void> register(@Validated @RequestBody StockSystemUser stockSystemUser) {
         JsonResult<Void> result = new JsonResult<>();
@@ -59,6 +62,7 @@ public class StockSystemUserController extends BaseController {
      * @param pwd 用户密码
      * @return 返回token和HTTP状态
      */
+    @Operation(summary = "用户登录")
     @GetMapping ("/login")
     public JsonResult<String> login(@Valid @Email(message = "请输入正确的邮箱格式") @RequestParam("email") String email,
                                     @RequestParam("pwd") String pwd) {
@@ -77,6 +81,7 @@ public class StockSystemUserController extends BaseController {
      * @author: Li
      * @date: 2023/3/6
      */
+    @Operation(summary = "注销用户")
     @DeleteMapping("/{username}")
     @ResponseBody
     public JsonResult<Void> deleteUser(HttpServletRequest request, @PathVariable("username") String username) {

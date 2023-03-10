@@ -7,6 +7,7 @@ import com.citi.stock.controller.ex.FileUploadException;
 import com.citi.stock.interceptor.ex.JwtException;
 import com.citi.stock.service.ex.*;
 import com.citi.stock.util.JsonResult;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.tomcat.util.http.fileupload.impl.FileUploadIOException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,6 +18,7 @@ import javax.validation.ConstraintViolationException;
 
 /** 控制层类的基类 */
 @RestControllerAdvice
+@Tag(name = "控制层的基类，用于全局异常处理", description = "异常处理，返回前端信息和状态码")
 public class BaseController {
     // 操作成功的状态码
     public static final int OK = 200;

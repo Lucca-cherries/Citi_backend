@@ -7,7 +7,8 @@ import com.citi.stock.util.JsonResult;
 import com.citi.stock.util.StockLatestVOWithTotal;
 import com.citi.stock.vo.StockLatestVO;
 import com.citi.stock.vo.StockVO;
-import org.apache.ibatis.annotations.Param;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,11 +19,13 @@ import java.util.List;
 
 @RequestMapping("/api/stocks")
 @RestController
+@Tag(name = "股票信息展示接口", description = "股票信息控制层")
 //@CrossOrigin
 public class StockController extends BaseController {
     @Autowired
     private IStockService iStockService;
 
+    @Operation(summary = "展示所有股票的最新实时详细信息")
     @GetMapping("")
     public JsonResult<StockLatestVOWithTotal> showDashboard(
             HttpServletRequest request,
@@ -52,6 +55,7 @@ public class StockController extends BaseController {
 
     }
 
+    @Operation(summary = "展示满足查询条件股票的最新实时详细信息")
     @GetMapping("/q")
     public JsonResult<StockLatestVOWithTotal> showConditionDashboard(
             HttpServletRequest request,
@@ -83,6 +87,7 @@ public class StockController extends BaseController {
         return new JsonResult<>(OK, new StockLatestVOWithTotal(total, stockVOList, finnhubList));
     }
 
+    @Operation(summary = "展示某一条股票的实时详细信息")
     @GetMapping("/{stockCode}")
     public JsonResult<StockLatestVO> showDetailOfOne(HttpServletRequest request, @PathVariable("stockCode") String stockCode){
         System.err.println("加载" + stockCode + "详情");
