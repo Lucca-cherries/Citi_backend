@@ -47,11 +47,11 @@ public class StockSystemUserController extends BaseController {
         } catch (UsernameDuplicateException e) {
             // 用户名被占用
             result.setState(4000);
-            result.setMessage("用户名已经被占用");
+            result.setMessage("User already exists.");
         } catch (InsertException e) {
             // 插入数据异常
             result.setState(4000);
-            result.setMessage("注册失败，请联系系统管理员");
+            result.setMessage("Database insertation failed. Please contact Admin.");
         }
         return result;
     }
