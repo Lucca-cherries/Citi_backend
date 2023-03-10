@@ -64,7 +64,7 @@ public class BaseController {
             result.setMessage("Database Insertion Error. Please Contact Admin.");
         } else if (e instanceof UpdateException) {
             result.setState(4000);
-            result.setMessage("Database Insertion Error. Please Contact Admin.");
+//            result.setMessage("Database Update Error. Please Contact Admin.");
         }
         return result;
     }

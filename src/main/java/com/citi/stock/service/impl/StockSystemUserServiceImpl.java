@@ -72,10 +72,10 @@ public class StockSystemUserServiceImpl implements IStockSystemUserService{
         if (uid.equals(originalUid)){
             int rows=stockSystemUserMapper.deleteByUsername(username);
             if (rows != 1) {
-                throw new UpdateException("注销用户失败，请联系系统管理员");
+                throw new UpdateException("Database Update Error. Please Contact Admin.");
             }
         } else {
-            throw new UpdateException("权限不足");
+            throw new UpdateException("Permission Denied.");
         }
     }
 
