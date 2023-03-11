@@ -29,7 +29,7 @@ public class StockMapperTests {
 
     @Test
     public void selectStockVOByCode(){
-        System.err.println(stockMapper.selectStockVOByCode(1, "AAPL"));
+        System.err.println(stockMapper.selectStockVOByCode(16, "AAPL"));
     }
 
     @Test
