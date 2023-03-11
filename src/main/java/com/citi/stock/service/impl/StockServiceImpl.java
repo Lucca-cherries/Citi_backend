@@ -100,11 +100,11 @@ public class StockServiceImpl implements IStockService {
 
     @Override
     public StockLatestVO getStockLatestVOofOne(Integer uid, String code) {
-        log.debug("Service: Get StockLatestVO of {} for user {}", code, uid);
+        log.info("Service: Get StockLatestVO of {} for user {}", code, uid);
         StockVO stockVO = getStockVOByCode(uid, code);
         List<String> singleCode = new ArrayList<>();
         singleCode.add(code);
-        log.debug("Service: Get finnhub for {}", singleCode);
+        log.info("Service: Get finnhub for {}", singleCode);
         Finnhub finnhub = getFinnhub(singleCode).get(0);
         return new StockLatestVO(stockVO, finnhub);
     }

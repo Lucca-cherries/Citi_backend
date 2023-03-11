@@ -54,7 +54,7 @@ public class StockServiceTests {
 
     @Test
     public void getStockLatestVOofOne(){
-        System.err.println(iStockService.getStockLatestVOofOne(1, "AAPL"));
+        System.err.println(iStockService.getStockLatestVOofOne(16, "MSFT"));
     }
 
     @Test

@@ -44,12 +44,17 @@
         limit #{size} offset #{start}
     </select>
 
+<!--    select stock_code, stock_name, stock_svg, IFNULL(userfavorites_user_id=#{uid},0)-->
+<!--    from stock left join user_favorites_relation-->
+<!--    on stock_code = userfavorites_stock_code-->
+<!--    where stock_code = #{code}-->
+<!--    limit 1 有bug！-->
     <select id="selectStockVOByCode" resultType="com.citi.stock.vo.StockVO">
         select stock_code, stock_name, stock_svg, IFNULL(userfavorites_user_id=#{uid},0)
         from stock left join user_favorites_relation
-        on stock_code = userfavorites_stock_code
-        where stock_code = #{code}
-        limit 1
+                             on stock_code = userfavorites_stock_code
+        where stock_code = #{code} and userfavorites_user_id=#{uid}
+            limit 1
     </select>
     <select id="conditionSelectStockVOByPage" resultType="com.citi.stock.vo.StockVO">
         select stock_code, stock_name, stock_svg, IFNULL(userfavorites_user_id=#{uid},0)
