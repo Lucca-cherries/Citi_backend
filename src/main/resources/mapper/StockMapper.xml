@@ -52,9 +52,9 @@
     <select id="selectStockVOByCode" resultType="com.citi.stock.vo.StockVO">
         select stock_code, stock_name, stock_svg, IFNULL(userfavorites_user_id=#{uid},0)
         from stock left join user_favorites_relation
-                             on stock_code = userfavorites_stock_code
+        on stock_code = userfavorites_stock_code
         where stock_code = #{code} and userfavorites_user_id=#{uid}
-            limit 1
+        limit 1
     </select>
     <select id="conditionSelectStockVOByPage" resultType="com.citi.stock.vo.StockVO">
         select stock_code, stock_name, stock_svg, IFNULL(userfavorites_user_id=#{uid},0)

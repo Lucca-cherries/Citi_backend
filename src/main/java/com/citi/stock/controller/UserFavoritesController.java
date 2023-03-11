@@ -39,7 +39,7 @@ public class UserFavoritesController extends BaseController {
     public JsonResult<Void> addOneFavorite(HttpServletRequest request,
                                      @PathVariable("stockCode") String stockCode){
         Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
-        log.debug("User {} favorite {}",uid, stockCode);
+        log.info("User {} favorite {}",uid, stockCode);
 
         iUserFavoritesRelationService.addOneFavorite(
                 UserFavoritesRelation.builder()
@@ -54,7 +54,7 @@ public class UserFavoritesController extends BaseController {
     public JsonResult<Void> cancelFavorite(HttpServletRequest request,
                                            @PathVariable("stockCode") String stockCode){
         Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
-        log.debug("User {} un-favorite {}",uid, stockCode);
+        log.info("User {} un-favorite {}",uid, stockCode);
 
         iUserFavoritesRelationService.deleteByUidAndCode(
                 UserFavoritesRelation.builder()
