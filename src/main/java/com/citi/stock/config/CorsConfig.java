@@ -22,7 +22,7 @@ public class CorsConfig {
         // Response Headers里面的Access-Control-Allow-Origin: http://localhost:8080
         config.addAllowedOrigin("http://localhost:8080");
         // 其实不建议使用*，允许所有跨域
-        config.addAllowedOrigin("*");
+        config.addAllowedOriginPattern("*");
 
         // 设置是否发送cookie信息，在前端也可以设置axios.defaults.withCredentials = true;表示发送Cookie,
         // 跨域请求要想带上cookie，必须要请求属性withCredentials=true，这是浏览器的同源策略导致的问题：不允许JS访问跨域的Cookie
