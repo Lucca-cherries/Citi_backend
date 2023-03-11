@@ -20,6 +20,9 @@ spring:
 logging:
   level:
     root: info
+  file:
+#    path: logs
+    name: stock.log
 
 server:
   port: 8088

@@ -1,0 +1,18 @@
+2023-03-11 18:57:59.973  INFO 20724 --- [main] com.citi.stock.StockApplication          : Starting StockApplication using Java 1.8.0_321 on DESKTOP-LUCCA with PID 20724 (D:\Javaaa\stock\target\classes started by bananaa in D:\Javaaa\stock)
+2023-03-11 18:57:59.976  INFO 20724 --- [main] com.citi.stock.StockApplication          : The following 1 profile is active: "dev"
+2023-03-11 18:58:00.690  INFO 20724 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-03-11 18:58:00.705  INFO 20724 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 JDBC repository interfaces.
+2023-03-11 18:58:01.126  INFO 20724 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2023-03-11 18:58:01.137  INFO 20724 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-03-11 18:58:01.137  INFO 20724 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-03-11 18:58:01.276  INFO 20724 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-03-11 18:58:01.276  INFO 20724 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1267 ms
+2023-03-11 18:58:02.089  INFO 20724 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-03-11 18:58:02.861  INFO 20724 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-03-11 18:58:02.969  INFO 20724 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2023-03-11 18:58:02.978  INFO 20724 --- [main] com.citi.stock.StockApplication          : Started StockApplication in 3.366 seconds (JVM running for 4.045)
+2023-03-11 19:33:42.572  INFO 20724 --- [http-nio-8088-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-11 19:33:42.573  INFO 20724 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-03-11 19:33:42.583  INFO 20724 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2023-03-11 19:33:42.721  WARN 20724 --- [http-nio-8088-exec-6] o.s.web.servlet.PageNotFound             : No mapping for GET /favicon.ico
+2023-03-11 19:33:44.566  INFO 20724 --- [http-nio-8088-exec-8] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 347 ms
