@@ -27,6 +27,7 @@
         <include refid="Base_Column_List" />
         from stock_record_history
         where stock_code = #{stockCode}
+        order by stockrecord_date desc
     </select>
 
     <insert id="insert" keyColumn="stockrecord_id" keyProperty="stockrecordId" parameterType="com.citi.stock.entity.StockRecordHistory" useGeneratedKeys="true">

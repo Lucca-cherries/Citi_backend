@@ -15,7 +15,7 @@ public class StockRecordHistoryMapperTests {
 
     @Test
     public void selectByStockCode(){
-        String code = "AAPL";
+        String code = "NKE";
         System.err.println(stockRecordHistoryMapper.selectByStockCode(code));
     }
 
