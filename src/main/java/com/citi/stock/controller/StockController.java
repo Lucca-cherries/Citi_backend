@@ -107,9 +107,14 @@ public class StockController extends BaseController {
     @Operation(summary = "展示某一条股票的实时详细信息")
     @GetMapping("/{stockCode}")
     public JsonResult<StockLatestVO> showDetailOfOne(HttpServletRequest request, @PathVariable("stockCode") String stockCode){
-        Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
-        log.info("Loading latest detail of {}, for user {}", stockCode, uid);
-        return new JsonResult<>(OK, iStockService.getStockLatestVOofOne(uid, stockCode));
+        try {
+            Integer uid = JWT.decode(request.getHeader("token")).getClaim("userId").asInt();
+            log.info("Loading latest detail of {}, for user {}", stockCode, uid);
+            return new JsonResult<>(OK, iStockService.getStockLatestVOofOne(uid, stockCode));
+        } catch (NullPointerException e) {
+            log.error("Show detail of one stock failed. Sth. may be wrong with token.");
+            throw new JwtException("Token Verification Error.");
+        }
 
     }
 

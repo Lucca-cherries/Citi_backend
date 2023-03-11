@@ -102,10 +102,12 @@ public class StockServiceImpl implements IStockService {
     public StockLatestVO getStockLatestVOofOne(Integer uid, String code) {
         log.info("Service: Get StockLatestVO of {} for user {}", code, uid);
         StockVO stockVO = getStockVOByCode(uid, code);
+        log.info(String.valueOf(stockVO));
         List<String> singleCode = new ArrayList<>();
         singleCode.add(code);
         log.info("Service: Get finnhub for {}", singleCode);
         Finnhub finnhub = getFinnhub(singleCode).get(0);
+        log.info(String.valueOf(finnhub));
         return new StockLatestVO(stockVO, finnhub);
     }
 }
