@@ -2,7 +2,7 @@
 Author: Guangqi Jiang, Jiaxin Li @SCU (project were done during internship @ Citi Bank)
 
 ## Intorduction
-This is the backend for stock dashboard project whose frontend is ...
+This is the backend for stock dashboard project whose frontend is https://github.com/A-PolarBear/Citi_Frontend
 
 ## Framework
 The picture below shows the overall framework of our backend design.
